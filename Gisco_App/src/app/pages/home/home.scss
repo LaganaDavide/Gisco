@@ -1,59 +1,65 @@
 page-home {
+    .scroll-content {
+        background-color: map-get($colors, light);
+    }
 
+    ion-card-header {
+        font-weight: bold;
+    }
 }
 
-.home-username {
-	font-size:10px
-}
+// .home-username {
+// 	font-size:10px
+// }
 
-.rounded-generic-card {
-    border-radius : 10px;
-    height: 100px;
-}
+// .rounded-generic-card {
+//     border-radius : 10px;
+//     height: 100px;
+// }
 
-.rounded-card-green {
-	border: 2px solid green;
-}
+// .rounded-card-green {
+// 	border: 2px solid green;
+// }
 
-.rounded-card-yellow {
-	border: 2px solid yellow;
-}
+// .rounded-card-yellow {
+// 	border: 2px solid yellow;
+// }
 
-.rounded-card-blue {
-	border: 2px solid blue;
-}
+// .rounded-card-blue {
+// 	border: 2px solid blue;
+// }
 
-.generic-card-header{
-	max-height: 30px;
+// .generic-card-header{
+// 	max-height: 30px;
 	
-	text-align: center;
-	padding-top: 3px;
-}
+// 	text-align: center;
+// 	padding-top: 3px;
+// }
 
-.generic-card-green{
-    background-color: green;
-}
+// .generic-card-green{
+//     background-color: green;
+// }
 
-.green-header {
-	background-color: green;
-	color:white;
-}
+// .green-header {
+// 	background-color: green;
+// 	color:white;
+// }
 
-.yellow-header {
-	background-color: yellow;
+// .yellow-header {
+// 	background-color: yellow;
 	
-}
+// }
 
-.blue-header {
-	background-color: blue;
-	color: blue;
-	color: whitesmoke;
-}
+// .blue-header {
+// 	background-color: blue;
+// 	color: blue;
+// 	color: whitesmoke;
+// }
 
-.generic-card-content-white{
-    background-color: #f8f9fa;
+// .generic-card-content-white{
+//     background-color: #f8f9fa;
     
-}
+// }
 
 /* stili del tema */
 

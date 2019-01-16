@@ -39,7 +39,7 @@ export class LoginPage {
 
   public login(): void {
     this.loginService.login(this.username, this.password).subscribe(r => {
-      if(r.ws_result != "E"){
+      if(r.result != "E"){
         this.userData.username = this.username;
         this.userData.password = this.password;
         this.userData.token = r.m_token_value;

@@ -13,7 +13,7 @@ export namespace Login {
         public m_token_permesso_key: number;
         public m_token_user: string;
         public m_token_password: string;
-        public ws_result: string;
+        public result: string;
         public ErrorMessage: MessaggioErrore;
     }
 }

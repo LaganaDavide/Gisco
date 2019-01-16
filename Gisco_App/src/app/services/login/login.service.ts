@@ -10,7 +10,7 @@ export class LoginService {
     }
   
     public login(username: string, password: string): Observable<Login.ws_Token> {
-      return this.httpService.getToken("http://allinappws.mesys.it/services/token/"+ username+ "/"+ 
+      return this.httpService.getToken("http://testapp.piattaformagisco.com/services/token/"+ username+ "/"+ 
             password);
     }
 }
