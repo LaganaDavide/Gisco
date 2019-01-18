@@ -1,0 +1,23 @@
+<!-- Generated template for the PageHeaderComponent component -->
+<div>
+  <div>
+    <ion-navbar align-title="center">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>ALL IN APP2</ion-title>
+      <!--<ion-img  src="assets/imgs/logo.png"></ion-img>-->
+    </ion-navbar>
+  </div>
+
+  <ion-menu [content]="mycontent">
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="logOut()"> LogOut </ion-item>
+        <ion-item menuClose detail-none>Close Menu</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>
+</div>

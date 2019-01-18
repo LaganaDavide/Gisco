@@ -1,16 +1,14 @@
 
 import { Error } from './../../models/shared/error.namespace';
-import { StoreService } from './../../services/store/store.service';
-import { Storage } from '@ionic/storage';
 
-import { Component } from '@angular/core';
+import { Component, Inject, forwardRef } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { LoginService } from '../../services/login/login.service';
+import { StoreService } from './../../services/store/store.service';
 import { ErrorService } from './../../services/shared/error.service';
 import { Login } from '../../models/login/login.namespace';
 
 import { HomePage} from '../../pages/home/home';
-import { User } from '../../models/user/user.namespace';
 
 /**
  * Generated class for the ComunicazioneComponent component.
@@ -24,25 +22,26 @@ import { User } from '../../models/user/user.namespace';
 })
 export class LoginPage {
 
-  private userData: User.UserData;
+  private userData: Login.ws_Token;
 
   private username: string = "";
   private password: string = ""; 
   
-  constructor(private loginService: LoginService,
+  constructor(@Inject(forwardRef(() => LoginService))  private loginService: LoginService,
     public navCtrl: NavController,
     private alertCtrl: AlertController,
-    private store: StoreService,
+    @Inject(forwardRef(() => StoreService)) private store: StoreService,
     private error: ErrorService){
-    this.userData = new User.UserData();
+    this.userData = new Login.ws_Token();
   }
 
   public login(): void {
     this.loginService.login(this.username, this.password).subscribe(r => {
       if(r.result != "E"){
-        this.userData.username = this.username;
-        this.userData.password = this.password;
-        this.userData.token = r.m_token_value;
+        this.userData.m_token_user = this.username;
+        this.userData.m_token_password = this.password;
+        this.userData.token_value = r.token_value;
+        this.userData.ErrorMessage = r.ErrorMessage;
         this.store.setUserData(this.userData);
         
         this.navCtrl.setRoot(HomePage, {val: 'pippo'});

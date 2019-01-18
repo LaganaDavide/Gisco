@@ -1,22 +1,6 @@
 <ion-header>
-  <ion-navbar  align-title="center" >
-	<button ion-button menuToggle ><ion-icon name="menu"></ion-icon></button>
-	<ion-title >ALL IN APP</ion-title>
-	<!--<ion-img  src="assets/imgs/logo.png"></ion-img>-->
-  </ion-navbar>
+ <!-- <page-header></page-header> -->
 </ion-header>
-
-<ion-menu [content]="mycontent">
-	<ion-content>
-	  <ion-list>
-		<ion-item (click)="logOut()"> LogOut </ion-item>
-		<ion-item menuClose detail-none>Close Menu</ion-item>
-	  </ion-list>
-	</ion-content>
-  </ion-menu>
-  
-  <ion-nav #mycontent [root]="rootPage"></ion-nav>
-
 <ion-content >
 	<ion-card class="rounded-generic-card">
 		<ion-card-header class="generic-card-header blue-header">Doughnut Chart</ion-card-header>

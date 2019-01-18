@@ -1,28 +1,57 @@
 import { LoadingPage } from './pages/loading/loading';
-import { User } from './models/user/user.namespace';
 
-import { StoreService } from './services/store/store.service';
-import { HomePage } from './pages/home/home';
-import { LoginPage } from "./pages/login/login";
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { Platform, Nav} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MenuController } from 'ionic-angular';
+
+import { Storage } from '@ionic/storage';
+
+import { HomePage } from './pages/home/home';
+import { LoginPage } from './pages/login/login';
+import { ElencoSitiPage } from './pages/siti/elenco-siti/elenco-siti';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild(Nav) nav: Nav;
   rootPage:any = LoadingPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private store: StoreService) {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+  private pagineSenzaMenu : Array<string> = new Array("LoadingPage", "LoginPage");
+
+  constructor(platform: Platform, 
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    public storage :Storage,
+    public menuCtrl: MenuController
+    ) {
 
       platform.ready().then(() => {
         statusBar.styleDefault();
         splashScreen.hide();
     });
+  };
+
+  public logOut(): void{
+    this.storage.clear();
+    this.menuCtrl.close();
+    this.nav.setRoot(LoginPage);
+  };
+
+  public goToHome(): void {
+    this.nav.setRoot(HomePage);
+  }
+
+  public showMenu(): boolean  {
+    let view = this.nav.getActive();
+    if(view){
+      return this.pagineSenzaMenu.indexOf(view.name) === -1;
+    } else return false;
+  };
+
+  public goToListaSiti(): void {
+    this.nav.push(ElencoSitiPage);
   }
 }

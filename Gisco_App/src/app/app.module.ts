@@ -1,4 +1,3 @@
-import { AboutPage } from './pages/about/about';
 import { ErrorService } from './services/shared/error.service';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,26 +11,34 @@ import { MyApp } from './app.component';
 import {LoginModule} from './modules/login/login.module';
 import {HomeModule} from './modules/home/home.module';
 import { LoadingModule } from './modules/loading/loading.module';
-// #REGION - Components/pages
-import { HomePage } from './pages/home/home';
-// import { TabsPage } from './pages/tabs/tabs';
-// import { ComunicazioniPage } from './pages/comunicazioni/comunicazioni';
-import { LoginPage } from './pages/login/login';
+import { ElencoSitiModule } from './modules/siti/elencoSiti/elencoSiti.module';
+import { MappaSitiModule } from './modules/siti/mappaSiti/mappaSiti.module';
+import { DashboardSitoModule } from './modules/siti/dashboardSito/dashboardSito.module';
+import { ComponentsModule } from './modules/componenti/components.module';
+
+// #REGION - Pages
 import { LoadingPage } from './pages/loading/loading';
+import { LoginPage } from './pages/login/login';
+import { HomePage } from './pages/home/home';
+
+//    SITI
+import { ElencoSitiPage } from './pages/siti/elenco-siti/elenco-siti';
+import { MappaSitiPage } from './pages/siti/mappa-siti/mappa-siti';
+import { DashboardSitoPage } from './pages/siti/dashboard-sito/dashboard-sito';
+
+// #REGION - Components
+
 // #REGION - Services
-import { ComunicazioneService } from './services/comunicazione.service';
 import { HttpService } from './services/shared/http.service';
 import { LoginService} from './services/login/login.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { StoreService } from './services/store/store.service';
+import { SitiService } from './services/siti/siti.service';
+import { CheckService } from './services/shared/check.service';
 
 @NgModule({
   declarations: [
-    MyApp,
-    //HomePage,
-    // TabsPage,
-    // ComunicazioniPage,
-    //LoginPage
+    MyApp
   ],
   imports: [
     IonicModule,
@@ -40,6 +47,10 @@ import { StoreService } from './services/store/store.service';
     HttpClientModule,
     HomeModule,
     LoadingModule,
+    ElencoSitiModule,
+    MappaSitiModule,
+    DashboardSitoModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -47,20 +58,26 @@ import { StoreService } from './services/store/store.service';
   entryComponents: [
     MyApp,
     HomePage,
-    // TabsPage,
-    // ComunicazioniPage,
     LoginPage,
     LoadingPage,
+    ElencoSitiPage,
+    MappaSitiPage,
+    DashboardSitoPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    ComunicazioneService,
+    StoreService,
     HttpService,
     LoginService,
-    StoreService,
     ErrorService,
+    Storage,
+    SitiService,
+    CheckService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ],
+  exports: [
+    ComponentsModule
   ]
 })
 export class AppModule {}

@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 
 import { LoginPage } from '../../pages/login/login';
-
-import { LoginService } from '../../services/login/login.service';
 
 @NgModule({
 	declarations: [
@@ -18,7 +16,6 @@ import { LoginService } from '../../services/login/login.service';
 		LoginPage
 	],
 	providers: [
-		LoginService
 	]
 })
 export class LoginModule {}

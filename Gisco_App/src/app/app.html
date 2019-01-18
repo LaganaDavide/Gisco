@@ -1,1 +1,21 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-header *ngIf="showMenu()">
+	<ion-navbar align-title="center">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title (click)="goToHome()">GISCO APP</ion-title>
+        <!--<ion-img  src="assets/imgs/logo.png"></ion-img>-->
+      </ion-navbar>
+</ion-header>
+
+<ion-menu [content]="mycontent">
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="logOut()"> LogOut </ion-item>
+        <ion-item menuClose detail-none>Close Menu</ion-item>
+        <ion-item (click)="goToListaSiti()">Lista Siti</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

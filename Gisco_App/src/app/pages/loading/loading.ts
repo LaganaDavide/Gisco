@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LoginPage } from "../login/login";
-import { User } from '../../models/user/user.namespace';
 
 /**
  * Generated class for the LoadingPage page.
@@ -22,7 +21,7 @@ export class LoadingPage {
     public navCtrl: NavController,
     private store: StoreService) {
     this.presentLoadingDefault();
-    this.store.userData$.subscribe((val: User.UserData) =>{
+    this.store.userData$.subscribe(val =>{
       console.log(val);
       if (val != null){
         this.navCtrl.setRoot(HomePage, {val: 'pippo'});

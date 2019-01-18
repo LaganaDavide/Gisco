@@ -1,13 +1,6 @@
+import { Component, ViewChild } from '@angular/core';
 
-
-
-import { LoginPage } from '../../pages/login/login';
-import { Storage } from '@ionic/storage';
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
-
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/dist/Chart.js';
 
 @Component({
   selector: 'page-home',
@@ -19,8 +12,7 @@ export class HomePage{
 
   doughnutChart: any;
 
-  constructor(public navCtrl: NavController,
-    private storage :Storage) {
+  constructor() {
 
   }
 
@@ -55,8 +47,5 @@ export class HomePage{
     });
   }
 
-  public logOut(): void{
-    this.storage.clear();
-    this.navCtrl.setRoot(LoginPage);
-  }
+
 }

@@ -1,22 +1,30 @@
 import { Http } from './../../models/shared/http.namespace';
-
-import { Injectable } from "@angular/core";
+import { Injectable, ViewChild } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/observable/of';
 import { Login } from "../../models/login/login.namespace";
+import { Nav } from 'ionic-angular';
 
 @Injectable()
-export class HttpService{
+export class HttpService {
 
-    constructor(private http: HttpClient){}
+    @ViewChild(Nav) nav;
 
-    public getToken(url: string) : Observable<Login.ws_Token>{
+    constructor(private http: HttpClient) { }
+
+    //questa operazione serve per il login
+    public getToken(url: string): Observable<Login.ws_Token> {
+
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.get<Login.ws_Token>(url, { headers: headers });
     }
-    
-    public get(url: string) : Observable<Http.HttpResponse>{
-        return this.http.get<Http.HttpResponse>(url);
+
+    //questa operazione va solo se si è loggati
+    public get(url: string, tokenValue: string): Observable<Http.HttpResponse> {
+
+        // vado a sostituire il placeholder con il token che ho in sesssione (se c'è) prima di fare qualsiasi chiamata get al server
+        var completeUrl = url.replace("TOKEN", tokenValue);
+
+        return this.http.get<Http.HttpResponse>(completeUrl);
     }
 }
