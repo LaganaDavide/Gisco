@@ -24,7 +24,7 @@ export class HttpService {
 
         // vado a sostituire il placeholder con il token che ho in sesssione (se c'è) prima di fare qualsiasi chiamata get al server
         var completeUrl = url.replace("TOKEN", tokenValue);
-
+        console.log('HttpService get ' + completeUrl);
         return this.http.get<Http.HttpResponse>(completeUrl);
     }
 }
