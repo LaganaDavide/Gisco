@@ -22,6 +22,8 @@ export class SitiService {
             + GlobalVariable.URL_SEPARATOR + GlobalVariable.URL_TOKEN_PLACEHOLDER  
             + GlobalVariable.URL_SEPARATOR + "0" //from
             + GlobalVariable.URL_SEPARATOR + "0" //to
+            + GlobalVariable.URL_SEPARATOR + "A" //provincia
+            + GlobalVariable.URL_SEPARATOR + "A" //testo libero
             + GlobalVariable.URL_SEPARATOR + "A", token);//tipologia
     }
 

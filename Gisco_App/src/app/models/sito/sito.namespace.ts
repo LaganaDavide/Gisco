@@ -4,7 +4,6 @@ export namespace Sito {
 
     export class Sito {
         public gr_ragione_sociale: string;
-        public prescrizioni_situazione: [];
         public prescrizioni_count: number;
         public comune_desc: string;
         public provincia_desc: string;
