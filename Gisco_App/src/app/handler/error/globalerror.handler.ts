@@ -6,8 +6,6 @@ export class GlobalErrorHandler implements ErrorHandler {
     constructor(){}
 
     handleError(error: any): void{
-
-
         throw error;
     }
 }

@@ -25,7 +25,7 @@ export class DashboardSitoPage {
     private storeService: StoreService) {
     this.selectedSito = navParams.get('sito');
 
-    console.log(this.selectedSito.indirizzo_completo);
+    // console.log(this.selectedSito.indirizzo_completo);
     console.log(this.selectedSito.gr_ragione_sociale);
   }
 
@@ -34,15 +34,15 @@ export class DashboardSitoPage {
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
-      this.sitiService.getSito(this.selectedSito.azienda_key, tokenValue).subscribe(r => {
-        console.log('ionViewDidLoad DashboardSitoPage getSito');
-        if(r.ErrorMessage.msg_code===0){
-          this.selectedSito=r.sito;
-          console.log(this.selectedSito.indirizzo_completo);
-          console.log(this.selectedSito.gr_ragione_sociale);
+      // this.sitiService.getSito(this.selectedSito.azienda_key, tokenValue).subscribe(r => {
+      //   console.log('ionViewDidLoad DashboardSitoPage getSito');
+      //   if(r.ErrorMessage.msg_code===0){
+      //     this.selectedSito=r.sito;
+      //     console.log(this.selectedSito.indirizzo_completo);
+      //     console.log(this.selectedSito.gr_ragione_sociale);
 
-        }
-      })
+      //   }
+      // })
     });
   }
 
