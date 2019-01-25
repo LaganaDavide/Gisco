@@ -53,5 +53,6 @@ export class MyApp {
 
   public goToListaSiti(): void {
     this.nav.push(ElencoSitiPage);
+    this.menuCtrl.close();
   }
 }

@@ -6,13 +6,31 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar no-border-bottom>
     <ion-title>dashboardSito</ion-title>
   </ion-navbar>
+
+<ion-toolbar no-border-top>
+    <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="friends">
+          <ion-label>Friends</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="enemies">
+          <ion-label>Enemies</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+</ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <!-- Default Segment -->
 
+  <h3 text-center *ngIf="selectedSito">
+    gr_ragione_sociale {{selectedSito.gr_ragione_sociale}}
+  </h3>
+  <h4 text-center *ngIf="selectedSito">
+    Indirizzo: <b>{{selectedSito.indirizzo_completo}}</b>
+  </h4>
 </ion-content>

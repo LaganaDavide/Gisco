@@ -89,12 +89,15 @@
     <allow-navigation href="http://192.168.1.15:8100" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.2" />
     <engine name="ios" spec="~4.5.4" />
-    <engine name="android" spec="~7.0.0" />
     <plugin name="cordova-plugin-cccometchat" spec="^7.0.37" />
     <allow-navigation href="http://192.168.1.2:8100" />
     <allow-navigation href="http://192.168.1.6:8100" />
+<<<<<<< HEAD
     <plugin name="cordova-plugin-googlemaps" spec="^2.5.0">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDXmAb965Z5_cWPc5btA8CXwzDzSvhwROk" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyDXmAb965Z5_cWPc5btA8CXwzDzSvhwROk" />
     </plugin>
+=======
+    <engine name="android" spec="~7.1.4" />
+>>>>>>> 36df46cdaca5c8602faa944849ba2151f8567ba2
 </widget>

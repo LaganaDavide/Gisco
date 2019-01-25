@@ -27,7 +27,8 @@ export class ElencoSitiPage {
   constructor(public navParams: NavParams,
     public sitiService: SitiService,
     private storeService: StoreService, 
-    private nav: Nav) {
+    private nav: Nav,
+    ) {
       this.listaSiti = new Array<Sito.Sito>();
   }
 
@@ -35,16 +36,20 @@ export class ElencoSitiPage {
     console.log('ionViewDidLoad ElencoSitiPage');
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
+      console.log(tokenValue);
       this.sitiService.getListaSiti(tokenValue).subscribe(r => {
-        if(r.Success){
-          this.listaSiti = r.Data;
+        console.log('ionViewDidLoad getListaSiti');
+        if(r.ErrorMessage.msg_code===0){
+          console.log(r.ErrorMessage.msg_code);
+          this.listaSiti = r.l_lista_siti;
         }
       })
     });
   }
 
   //navigazione verso la dashboard dello specifico sito selezionato
-  public goToDetails(sito: Sito.Sito): void{
+  public goToDetails(event, sito){
     this.nav.push(DashboardSitoPage, {sito : sito})
   }
+  
 }
