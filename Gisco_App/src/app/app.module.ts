@@ -36,6 +36,7 @@ import { StoreService } from './services/store/store.service';
 import { SitiService } from './services/siti/siti.service';
 import { CheckService } from './services/shared/check.service';
 
+
 @NgModule({
   declarations: [
     MyApp
