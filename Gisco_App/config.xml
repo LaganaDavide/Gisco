@@ -93,4 +93,8 @@
     <plugin name="cordova-plugin-cccometchat" spec="^7.0.37" />
     <allow-navigation href="http://192.168.1.2:8100" />
     <allow-navigation href="http://192.168.1.6:8100" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.5.0">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDXmAb965Z5_cWPc5btA8CXwzDzSvhwROk" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyDXmAb965Z5_cWPc5btA8CXwzDzSvhwROk" />
+    </plugin>
 </widget>
