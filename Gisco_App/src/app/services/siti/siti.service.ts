@@ -35,6 +35,7 @@ export class SitiService {
     public getSito(key: number, token: string): Observable<Http.HttpResponse> {
         return this.httpService.get(GlobalVariable.BASE_API_URL + GlobalVariable.SITI_GET_KEYWORD
             + GlobalVariable.URL_SEPARATOR + GlobalVariable.URL_TOKEN_PLACEHOLDER  
-            + GlobalVariable.URL_SEPARATOR + key, token);//id sito
+            + GlobalVariable.URL_SEPARATOR + key, token);//id sito esempio: key=120 ha tutti i dati che devono essere visualizzati
     }
+
 }

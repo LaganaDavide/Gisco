@@ -4,11 +4,29 @@
     <ion-card class="rounded-generic-card">
         <ion-card-header class="generic-card-header blue-header">ELENCO SITI</ion-card-header>
         <ion-card-content class="yellow-header">
+            <ion-searchbar placeholder="az_ragione_sociale/titolo" (ionInput)="getSiti($event)"></ion-searchbar>
+            <ion-item>
+                <ion-label>Tipologia</ion-label>
+                <ion-select [(ngModel)]="tipologia" (ionChange)="tipologiaChanged(tipologia)">
+                    <ion-option *ngFor="let tipologia of listaTipologie" [value]="t">{{tipologia}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Provincia</ion-label>
+                <ion-select [(ngModel)]="provincia" (ionChange)="provinciaChanged(provincia)">
+                    <ion-option *ngFor="let provincia of listaProvince" [value]="p">{{provincia}}</ion-option>
+                </ion-select>
+            </ion-item>
             <ion-list>
                 <ion-item *ngFor="let sito of listaSiti" (click)="goToDetails($event, sito)">
-                  {{sito.gr_ragione_sociale}}
+                    <ion-label>codice {{sito.az_codice_interno}}</ion-label>
+                    <ion-label>titolo {{sito.az_ragione_sociale}}</ion-label>
+                    <ion-label>Tipologia {{sito.tab_tipologia_sito_desc}}</ion-label>
+                    <ion-label>Indirizzo {{sito.indirizzo_completo}}</ion-label>
+                    <ion-label>Cliente {{sito.gr_ragione_sociale}}</ion-label>
+                    <ion-label>icona {{sito.prescrizioni_count}}</ion-label>
                 </ion-item>
-              </ion-list>
+            </ion-list>
         </ion-card-content>
-      </ion-card>
+    </ion-card>
 </ion-content>

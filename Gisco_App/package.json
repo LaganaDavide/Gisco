@@ -21,13 +21,7 @@
     "@angular/http": "5.2.9",
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
-<<<<<<< HEAD
-    "@ionic-native/core": "^5.0.0",
-    "@ionic-native/firebase": "^5.0.0",
-    "@ionic-native/google-maps": "^5.0.0-beta.26",
-=======
     "@ionic-native/core": "4.6.0",
->>>>>>> 8ebec11fcc78c19b81f45cc31b236c09c389d993
     "@ionic-native/splash-screen": "4.6.0",
     "@ionic-native/status-bar": "4.6.0",
     "@ionic/storage": "^2.1.3",

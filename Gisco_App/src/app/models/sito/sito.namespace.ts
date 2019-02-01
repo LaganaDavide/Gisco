@@ -4,7 +4,6 @@ export namespace Sito {
 
     export class Sito {
         public gr_ragione_sociale: string;
-        //public prescrizioni_situazione: [];
         public prescrizioni_count: number;
         public comune_desc: string;
         public provincia_desc: string;
@@ -31,7 +30,6 @@ export namespace Sito {
         public da_utilizzare: number;
         public az_baricentro_n: number;
         public az_baricentro_e: number;
-
         public gruppo_desc: string;
         public az_cap: number;
         public az_comune_cod: number;
@@ -60,5 +58,36 @@ export namespace Sito {
         public documenti: string;
         public societa: Societa.Societa;
         public st_assegnato_permesso: string;
-        }
+    }
+
+    export class Catastale {
+        public azienda_key: number;
+        public azienda_catastale_key: number;
+        public az_codice_interno: string;
+        public az_ragione_sociale: string;
+        public azc_settore: string;
+        public azc_desc: string;
+        public tab_tipo_proprieta_desc: string;
+        public tab_stato_proprieta_desc: string;
+        public azc_alienabile: string;
+        public procedimenti_chiusi: number;
+        public procedimenti_aperti: number;
+    }
+
+    export class Procedimento {
+        public pr_totali: number;
+       // elenco_fasi: [ ],
+        com_azienda_key: number;
+        com_procedimento_key: number;
+        pro_titolo: string;
+        pro_tipo_procedimento_cod: number;
+        pro_chiuso: string;
+        tab_tipo_procedimento_desc: string;
+        pr_ottemperate: number;
+        pr_vincolate: number;
+        pr_senza_data: number;
+        pr_scadute: number;
+        pr_in_scadenza: number;
+        pr_prossime: number;
+    }
 }

@@ -5,4 +5,8 @@ export const GlobalVariable = Object.freeze({
     SITI_GET_ELENCO_KEYWORD: 'get_elenco_siti',
     SITI_GET_TIPOLOGIE_KEYWORD: 'get_tipologie_siti',
     SITI_GET_KEYWORD: 'get_sito',
+    
+    DISPOSITIVI_GET_ELENCO_KEYWORD: 'get_elenco_dispositivi',
+    DISPOSITIVI_GET_KEYWORD: 'get_dispositivo',
+
 });
