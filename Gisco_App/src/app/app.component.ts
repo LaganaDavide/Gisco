@@ -11,10 +11,12 @@ import { Storage } from '@ionic/storage';
 import { HomePage } from './pages/home/home';
 import { LoginPage } from './pages/login/login';
 import { ElencoSitiPage } from './pages/siti/elenco-siti/elenco-siti';
+import { MappaSitiPage } from './pages/siti/mappa-siti/mappa-siti';
 import { ElencoDispositiviPage } from './pages/dispositivi/elenco-dispositivi/elenco-dispositivi';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  styles: ['app.scss']
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -54,6 +56,11 @@ export class MyApp {
 
   public goToListaSiti(): void {
     this.nav.push(ElencoSitiPage);
+    this.menuCtrl.close();
+  }
+
+  public goToMappaSiti(): void {
+    this.nav.push(MappaSitiPage);
     this.menuCtrl.close();
   }
 

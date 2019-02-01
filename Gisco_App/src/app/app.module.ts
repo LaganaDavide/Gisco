@@ -17,6 +17,7 @@ import { DashboardSitoModule } from './modules/siti/dashboardSito/dashboardSito.
 import { ComponentsModule } from './modules/componenti/components.module';
 import { ElencoDispositiviModule } from './modules/dispositivi/elencoDispositivi/elencoDispositivi.module';
 import { DashboardDispositivoModule } from './modules/dispositivi/DashboardDispositivo/dashboardDispositivo.module';
+import { AgmCoreModule } from '@agm/core';
 
 // #REGION - Pages
 import { LoadingPage } from './pages/loading/loading';
@@ -63,7 +64,12 @@ import { CheckService } from './services/shared/check.service';
     DashboardDispositivoModule,
     ComponentsModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyDXmAb965Z5_cWPc5btA8CXwzDzSvhwROk'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

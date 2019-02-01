@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { Nav, NavParams } from 'ionic-angular';
 
 import { DashboardSitoPage } from '../dashboard-sito/dashboard-sito';

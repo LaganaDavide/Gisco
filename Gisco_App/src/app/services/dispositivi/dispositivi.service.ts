@@ -2,7 +2,6 @@ import { Injectable,ViewChild } from "@angular/core";
 import { HttpService } from "../shared/http.service";
 import { Observable } from "rxjs/Observable";
 import {GlobalVariable} from '../../global';
-import { StoreService } from '../../services/store/store.service';
 
 import {Http } from '../../models/shared/http.namespace';
 import { Nav} from 'ionic-angular';
@@ -12,8 +11,7 @@ export class DispositiviService {
 
     @ViewChild(Nav) nav;
 
-    constructor(private httpService: HttpService, 
-        private storeService: StoreService) {
+    constructor(private httpService: HttpService) {
     }
 
     public getListaDispositivi(token: string): Observable<Http.HttpResponse> {
