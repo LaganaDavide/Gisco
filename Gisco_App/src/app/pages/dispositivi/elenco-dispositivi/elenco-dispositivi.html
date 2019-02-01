@@ -1,0 +1,21 @@
+<ion-header>
+</ion-header>
+<ion-content padding>
+    <ion-card class="rounded-generic-card">
+        <ion-card-header class="generic-card-header blue-header">ELENCO DISPOSITIVI</ion-card-header>
+        <ion-card-content class="yellow-header">
+            <ion-list>
+                <ion-item *ngFor="let dispositivo of listaDispositivi" (click)="goToDetails($event, dispositivo)">
+                  {{dispositivo.az_codice_interno}}
+                  {{dispositivo.az_ragione_sociale}}
+                  {{dispositivo.dis_titolo}}
+                  {{dispositivo.tab_tipo_dispositivo_desc}}
+                  {{dispositivo.attivita_situazione.att_scadute}}
+                  {{dispositivo.attivita_situazione.att_prossime}}
+                  {{dispositivo.attivita_situazione.att_future}}
+                  stato
+                </ion-item>
+              </ion-list>
+        </ion-card-content>
+      </ion-card>
+</ion-content>
