@@ -27,6 +27,7 @@ export class MapComponent implements OnInit{
         this.markers = this.mapModel.markers;
         this.lat = this.mapModel.centerLat;
         this.lng = this.mapModel.centerLon;
+        this.zoom = this.mapModel.initialZoom;
     }
 
     public clickedMarker(label: string, index: number): void  {
