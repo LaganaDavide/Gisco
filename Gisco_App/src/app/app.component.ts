@@ -13,6 +13,10 @@ import { LoginPage } from './pages/login/login';
 import { ElencoSitiPage } from './pages/siti/elenco-siti/elenco-siti';
 import { MappaSitiPage } from './pages/siti/mappa-siti/mappa-siti';
 import { ElencoDispositiviPage } from './pages/dispositivi/elenco-dispositivi/elenco-dispositivi';
+import { MappaDispositiviPage } from './pages/dispositivi/mappa-dispositivi/mappa-dispositivi';
+import { ChatPage } from './pages/chat/chat';
+
+//declare var CCCometChat: any;
 
 @Component({
   templateUrl: 'app.html',
@@ -68,4 +72,17 @@ export class MyApp {
     this.nav.push(ElencoDispositiviPage);
     this.menuCtrl.close();
   }
+
+  public goToMappaDispositivi(): void {
+    this.nav.push(MappaDispositiviPage);
+    this.menuCtrl.close();
+  }
+
+
+  public goToChat(): void {
+    this.nav.push(ChatPage);
+    this.menuCtrl.close();
+  }
+
+
 }

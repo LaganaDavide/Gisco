@@ -17,6 +17,7 @@ import { DashboardSitoModule } from './modules/siti/dashboardSito/dashboardSito.
 import { ComponentsModule } from './modules/componenti/components.module';
 import { ElencoDispositiviModule } from './modules/dispositivi/elencoDispositivi/elencoDispositivi.module';
 import { DashboardDispositivoModule } from './modules/dispositivi/DashboardDispositivo/dashboardDispositivo.module';
+import { ChatModule } from './modules/chat/chat.module';
 import { AgmCoreModule } from '@agm/core';
 
 // #REGION - Pages
@@ -33,6 +34,9 @@ import { DashboardSitoPage } from './pages/siti/dashboard-sito/dashboard-sito';
 import { ElencoDispositiviPage } from './pages/dispositivi/elenco-dispositivi/elenco-dispositivi';
 import { DashboardDispositivoPage } from './pages/dispositivi/dashboard-dispositivo/dashboard-dispositivo';
 
+//    CHAT
+import { ChatPage } from './pages/chat/chat';
+
 
 // #REGION - Components
 
@@ -44,6 +48,8 @@ import { StoreService } from './services/store/store.service';
 import { SitiService } from './services/siti/siti.service';
 import { DispositiviService } from './services/dispositivi/dispositivi.service';
 import { CheckService } from './services/shared/check.service';
+import { MappaDispositiviPage } from './pages/dispositivi/mappa-dispositivi/mappa-dispositivi';
+import { MappaDispositiviModule } from './modules/dispositivi/mappaDispositivi/mappaDispositivi.module';
 
 
 @NgModule({
@@ -61,8 +67,10 @@ import { CheckService } from './services/shared/check.service';
     MappaSitiModule,
     DashboardSitoModule,
     ElencoDispositiviModule,
+    MappaDispositiviModule,
     DashboardDispositivoModule,
     ComponentsModule,
+    ChatModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({
@@ -81,7 +89,9 @@ import { CheckService } from './services/shared/check.service';
     MappaSitiPage,
     DashboardSitoPage,
     ElencoDispositiviPage,
-    DashboardDispositivoPage
+    MappaDispositiviPage,
+    DashboardDispositivoPage,
+    ChatPage
   ],
   providers: [
     StatusBar,

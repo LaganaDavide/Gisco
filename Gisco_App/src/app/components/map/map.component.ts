@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 
 import { Common } from '../../models/common/common.namespace';
@@ -11,7 +11,8 @@ import { Common } from '../../models/common/common.namespace';
 export class MapComponent implements OnInit{
 
     @Input() mapModel: Common.MapModel;
-
+    @Output() onMarkerClicked: EventEmitter<any> = new EventEmitter();
+    
     // google maps zoom level
     zoom: number = 8;
 
@@ -32,6 +33,7 @@ export class MapComponent implements OnInit{
 
     public clickedMarker(label: string, index: number): void  {
         console.log(`clicked the marker: ${label || index}`)
+        this.onMarkerClicked.emit(index);
     }
 
     public mapClicked($event: MouseEvent): void {
@@ -41,5 +43,12 @@ export class MapComponent implements OnInit{
     markerDragEnd(m: Common.MapMarker, $event: MouseEvent) {
         console.log('dragEnd', m, $event);
     }
+
+    reloadMap() {
+        console.log('reloadMap');
+        this.markers = this.mapModel.markers;
+    }
+
+
 
 }

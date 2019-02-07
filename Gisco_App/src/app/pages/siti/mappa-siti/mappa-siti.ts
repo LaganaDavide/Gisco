@@ -7,6 +7,7 @@ import { SitiService } from '../../../services/siti/siti.service';
 import { Sito } from '../../../models/sito/sito.namespace';
 import { Login } from '../../../models/login/login.namespace';
 import { Common } from '../../../models/common/common.namespace';
+import { DashboardSitoPage } from '../dashboard-sito/dashboard-sito';
 
 /**
  * Generated class for the MappaSitiPage page.
@@ -19,6 +20,7 @@ import { Common } from '../../../models/common/common.namespace';
   selector: 'page-mappa-siti',
   templateUrl: 'mappa-siti.html'
 })
+
 export class MappaSitiPage {
 
   public listaAllSiti: Array<Sito.Sito>;
@@ -38,8 +40,8 @@ export class MappaSitiPage {
     public storeService: StoreService,
     public sitiService: SitiService) {
     this.listaSiti = new Array<Sito.Sito>();
-    this.listaProvince = ["All", "RM", "PU", "TO"];
-    this.listaTipologie = ["All", "Autostradale", "Punto vendita", "Centro agricolo", "Deposito AGIP fuel", "Deposito AGIP gas", "Uffici"];
+    this.listaProvince = sitiService.getListaProvinceSito();
+    this.listaTipologie = sitiService.getListaTipologieSito();
     this.tipologia = this.listaTipologie[0];
     this.provincia = this.listaProvince[0];
 
@@ -60,20 +62,21 @@ export class MappaSitiPage {
       this.sitiService.getListaSiti(tokenValue).subscribe(r => {
         console.log('ionViewDidLoad getListaSiti');
         if (r.ErrorMessage.msg_code === 0) {
+          this.listaSiti = r.l_lista_siti;
+          this.listaAllSiti = this.listaSiti;
 
           //genero il modello da passare al componente MAPPA
           this.mapModel.centerLat = 41.893056;
           this.mapModel.centerLon = 12.482778;
           this.mapModel.initialZoom = 6;
 
-          for(let sito of r.l_lista_siti) {
+          for (let sito of this.listaAllSiti) {
             var marker = new Common.MapMarker();
 
             marker.lat = sito.az_baricentro_n;
             marker.lgn = sito.az_baricentro_e;
             marker.lab = sito.az_ragione_sociale;
             marker.draggable = false;
-
             this.mapModel.markers.push(marker);
           }
 
@@ -83,4 +86,60 @@ export class MappaSitiPage {
     });
   }
 
+  //navigazione verso la dashboard dello specifico sito selezionato
+  public goToDetailsSito(event) {    
+    var sitoSelezionato=this.listaSiti[parseInt(event)];
+    this.navCtrl.push(DashboardSitoPage, { sito: sitoSelezionato })
+  }
+
+  public getSiti(event) {
+    // Reset items back to all of the items
+
+    this.listaSiti = this.listaAllSiti;
+
+    if (event != undefined) {
+      this.q = event.srcElement.value;
+    }
+
+    this.listaSiti = this.listaAllSiti.filter((v) => {
+      if ( (!this.q || this.q.trim() == '' || v.az_ragione_sociale.toLowerCase().indexOf(this.q.toLowerCase()) > -1) && 
+        (this.provincia == this.listaProvince[0] || v.provincia_desc.indexOf(this.provincia) > -1) && 
+        (this.tipologia == this.listaTipologie[0] || v.tab_tipologia_sito_desc.indexOf(this.tipologia) > -1)
+      ) {
+
+        return true;
+      }
+      return false;
+    });
+
+    this.mapModel.markers.length=0;
+
+    for (let sito of this.listaSiti) {
+      var marker = new Common.MapMarker();
+
+      marker.lat = sito.az_baricentro_n;
+      marker.lgn = sito.az_baricentro_e;
+      marker.lab = sito.az_ragione_sociale;
+      marker.draggable = false;
+
+      this.mapModel.markers.push(marker);
+    }
+
+    console.log(this.tipologia, this.listaSiti.length);
+    console.log(this.q, this.listaSiti.length);
+    console.log(this.q, this.listaAllSiti.length);
+    console.log(this.q, this.mapModel.markers.length);
+  }
+
+  public tipologiaChanged(tipologia) {
+    console.log("tipologia", tipologia);
+    this.tipologia = tipologia;
+    this.getSiti(undefined);
+  }
+
+  public provinciaChanged(provincia) {
+    console.log("provincia", provincia);
+    this.provincia = provincia;
+    this.getSiti(undefined);
+  }
 }

@@ -10,6 +10,7 @@ import { Nav} from 'ionic-angular';
 export class SitiService {
 
     @ViewChild(Nav) nav;
+  sitiService: string[];
 
     constructor(private httpService: HttpService) {
     }
@@ -34,6 +35,14 @@ export class SitiService {
         return this.httpService.get(GlobalVariable.BASE_API_URL + GlobalVariable.SITI_GET_KEYWORD
             + GlobalVariable.URL_SEPARATOR + GlobalVariable.URL_TOKEN_PLACEHOLDER  
             + GlobalVariable.URL_SEPARATOR + key, token);//id sito esempio: key=120 ha tutti i dati che devono essere visualizzati
+    }
+
+    public getListaProvinceSito(): Array<string> {
+        return ["All", "RM", "PU", "TO"];
+    }
+
+    public getListaTipologieSito(): Array<string> {
+        return ["All", "Autostradale", "Punto vendita", "Centro agricolo", "Deposito AGIP fuel", "Deposito AGIP gas", "Uffici"];
     }
 
 }

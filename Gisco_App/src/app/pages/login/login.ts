@@ -36,6 +36,7 @@ export class LoginPage {
   }
 
   public login(): void {
+
     this.loginService.login(this.username, this.password).subscribe(r => {
       if(r.result != "E"){
         this.userData.m_token_user = this.username;
@@ -57,7 +58,6 @@ export class LoginPage {
 
   presentAlert() {
     // se serve, qui si puo' mettere una chiamata per tenere traccia di chi ha tentato e fallito il login
-
     let alert = this.alertCtrl.create({
       title: 'Login Failed',
       subTitle: 'Retry',

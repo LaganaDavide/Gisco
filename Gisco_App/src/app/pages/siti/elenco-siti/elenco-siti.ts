@@ -36,8 +36,8 @@ export class ElencoSitiPage {
     private storeService: StoreService,
     private nav: Nav) {
     this.listaSiti = new Array<Sito.Sito>();
-    this.listaProvince = ["All", "RM", "PU", "TO"];
-    this.listaTipologie = ["All", "Autostradale", "Punto vendita", "Centro agricolo", "Deposito AGIP fuel", "Deposito AGIP gas", "Uffici"];
+    this.listaProvince = sitiService.getListaProvinceSito();
+    this.listaTipologie = sitiService.getListaTipologieSito();// ["All", "Autostradale", "Punto vendita", "Centro agricolo", "Deposito AGIP fuel", "Deposito AGIP gas", "Uffici"];
     this.tipologia = this.listaTipologie[0];
     this.provincia = this.listaProvince[0];
   }
