@@ -1,0 +1,39 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"CCCometChat\"><param name=\"ios-package\" value=\"CCCometChat\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "cordova-plugin-cccometchat": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-cccometchat.CCCometChat",
+      "file": "plugins/cordova-plugin-cccometchat/www/CCCometChat.js",
+      "pluginId": "cordova-plugin-cccometchat",
+      "clobbers": [
+        "CCCometChat"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-cccometchat": "7.27.0"
+  }
+}

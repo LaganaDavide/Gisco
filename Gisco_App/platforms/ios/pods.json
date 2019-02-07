@@ -1,0 +1,38 @@
+{
+    "MessageSDKFramework": {
+        "name": "MessageSDKFramework",
+        "type": "podspec",
+        "spec": "~>7.27.0",
+        "count": 1
+    },
+    "cometchat-ui": {
+        "name": "cometchat-ui",
+        "type": "podspec",
+        "spec": "~>7.27.0",
+        "count": 1
+    },
+    "Firebase": {
+        "name": "Firebase",
+        "type": "podspec",
+        "spec": "~>5.7.0",
+        "count": 1
+    },
+    "Firebase/Auth": {
+        "name": "Firebase/Auth",
+        "type": "podspec",
+        "spec": "~>5.7.0",
+        "count": 1
+    },
+    "Firebase/Messaging": {
+        "name": "Firebase/Messaging",
+        "type": "podspec",
+        "spec": "~>5.7.0",
+        "count": 1
+    },
+    "Firebase/Database": {
+        "name": "Firebase/Database",
+        "type": "podspec",
+        "spec": "~>5.7.0",
+        "count": 1
+    }
+}
