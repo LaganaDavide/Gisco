@@ -16,8 +16,7 @@ export class ChatPage {
 
     constructor(public navParams: NavParams,
         private storeService: StoreService,
-        private nav: Nav,
-    ) {
+        private nav: Nav ) {
     }
 
     ionViewDidLoad() {

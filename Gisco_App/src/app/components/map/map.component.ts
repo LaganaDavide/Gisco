@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 
 import { Common } from '../../models/common/common.namespace';
@@ -43,12 +43,5 @@ export class MapComponent implements OnInit{
     markerDragEnd(m: Common.MapMarker, $event: MouseEvent) {
         console.log('dragEnd', m, $event);
     }
-
-    reloadMap() {
-        console.log('reloadMap');
-        this.markers = this.mapModel.markers;
-    }
-
-
 
 }

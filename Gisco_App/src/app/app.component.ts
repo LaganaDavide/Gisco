@@ -15,6 +15,7 @@ import { MappaSitiPage } from './pages/siti/mappa-siti/mappa-siti';
 import { ElencoDispositiviPage } from './pages/dispositivi/elenco-dispositivi/elenco-dispositivi';
 import { MappaDispositiviPage } from './pages/dispositivi/mappa-dispositivi/mappa-dispositivi';
 import { ChatPage } from './pages/chat/chat';
+import { CartellePage } from './pages/documenti/cartelle/cartelle';
 
 //declare var CCCometChat: any;
 
@@ -84,5 +85,9 @@ export class MyApp {
     this.menuCtrl.close();
   }
 
+  public goToDocumenti(): void {
+    this.nav.push(CartellePage);
+    this.menuCtrl.close();
+  }
 
 }

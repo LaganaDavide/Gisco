@@ -8,6 +8,7 @@ import { Sito } from '../../../models/sito/sito.namespace';
 import { Login } from '../../../models/login/login.namespace';
 import { Common } from '../../../models/common/common.namespace';
 import { DashboardSitoPage } from '../dashboard-sito/dashboard-sito';
+import { Filtro } from '../../../models/filtro/filtro.namespace';
 
 /**
  * Generated class for the MappaSitiPage page.
@@ -23,13 +24,12 @@ import { DashboardSitoPage } from '../dashboard-sito/dashboard-sito';
 
 export class MappaSitiPage {
 
-  public listaAllSiti: Array<Sito.Sito>;
   public listaSiti: Array<Sito.Sito>;
-  public listaProvince: Array<string>;
-  public listaTipologie: Array<string>;
-  public tipologia: string;
-  public provincia: string;
-  public q: any;
+  public listaProvince: Array<Filtro.Provincia>;
+  public listaTipologie: Array<Filtro.TipologiaSito>;
+  public tipologiaSelezionata: Filtro.TipologiaSito;
+  public provinciaSelezionata: Filtro.Provincia;
+  public campoLibero: string;
 
   public mapModel: Common.MapModel;
 
@@ -40,17 +40,13 @@ export class MappaSitiPage {
     public storeService: StoreService,
     public sitiService: SitiService) {
     this.listaSiti = new Array<Sito.Sito>();
-    this.listaProvince = sitiService.getListaProvinceSito();
-    this.listaTipologie = sitiService.getListaTipologieSito();
-    this.tipologia = this.listaTipologie[0];
-    this.provincia = this.listaProvince[0];
+    this.campoLibero = "A";
 
     var mapMarkers: Common.MapMarker[] = [];
     this.mapModel = new Common.MapModel();
     this.mapModel.markers = mapMarkers;
 
     this.showMap = false;
-
   }
 
   ionViewDidLoad() {
@@ -59,18 +55,17 @@ export class MappaSitiPage {
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
-      this.sitiService.getListaSiti(tokenValue).subscribe(r => {
+      this.sitiService.getListaSitiAll(tokenValue).subscribe(r => {
         console.log('ionViewDidLoad getListaSiti');
         if (r.ErrorMessage.msg_code === 0) {
           this.listaSiti = r.l_lista_siti;
-          this.listaAllSiti = this.listaSiti;
 
           //genero il modello da passare al componente MAPPA
           this.mapModel.centerLat = 41.893056;
           this.mapModel.centerLon = 12.482778;
           this.mapModel.initialZoom = 6;
 
-          for (let sito of this.listaAllSiti) {
+          for (let sito of this.listaSiti) {
             var marker = new Common.MapMarker();
 
             marker.lat = sito.az_baricentro_n;
@@ -83,63 +78,74 @@ export class MappaSitiPage {
           this.showMap = true;
         }
       })
+
+      this.sitiService.getListaTipologieSito(tokenValue).subscribe(r => {
+        if (r.ErrorMessage.msg_code === 0) {
+          console.log(r.ErrorMessage.msg_code);
+          this.listaTipologie = r.l_lista_tipologie;
+          this.tipologiaSelezionata = this.listaTipologie[0];
+        }
+      })
+
+      this.sitiService.getListaProvinceSito(tokenValue).subscribe(r => {
+        if (r.ErrorMessage.msg_code === 0) {
+          console.log(r.ErrorMessage.msg_code);
+          this.listaProvince = r.l_dropdown;
+          this.provinciaSelezionata = this.listaProvince[0];
+        }
+      })
+
     });
   }
 
   //navigazione verso la dashboard dello specifico sito selezionato
-  public goToDetailsSito(event) {    
-    var sitoSelezionato=this.listaSiti[parseInt(event)];
+  public goToDetailsSito(event) {
+    var sitoSelezionato = this.listaSiti[parseInt(event)];
     this.navCtrl.push(DashboardSitoPage, { sito: sitoSelezionato })
   }
 
   public getSiti(event) {
-    // Reset items back to all of the items
-
-    this.listaSiti = this.listaAllSiti;
-
     if (event != undefined) {
-      this.q = event.srcElement.value;
+      this.campoLibero = event.srcElement.value;
+    }
+    if (this.campoLibero === "") {
+      this.campoLibero = "A";
+    }
+    if (this.tipologiaSelezionata.tab_tipologia_sito_key === 0) {
+      this.tipologiaSelezionata.tab_tipologia_sito_key = "A"
+    }
+    if (this.provinciaSelezionata.Codice === "") {
+      this.provinciaSelezionata.Codice = "A"
     }
 
-    this.listaSiti = this.listaAllSiti.filter((v) => {
-      if ( (!this.q || this.q.trim() == '' || v.az_ragione_sociale.toLowerCase().indexOf(this.q.toLowerCase()) > -1) && 
-        (this.provincia == this.listaProvince[0] || v.provincia_desc.indexOf(this.provincia) > -1) && 
-        (this.tipologia == this.listaTipologie[0] || v.tab_tipologia_sito_desc.indexOf(this.tipologia) > -1)
-      ) {
+    this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
+      var tokenValue = val.token_value;
 
-        return true;
-      }
-      return false;
+      this.sitiService.getListaSiti(tokenValue, this.tipologiaSelezionata.tab_tipologia_sito_key, this.provinciaSelezionata.Codice, this.campoLibero).subscribe(r => {
+        console.log('ionViewDidLoad getListaSiti');
+        if (r.ErrorMessage.msg_code === 0) {
+          console.log(r.ErrorMessage.msg_code);
+          this.listaSiti = r.l_lista_siti;
+          console.log("getSiti listaSiti", this.listaSiti.length);
+
+          this.mapModel.markers.length = 0;
+
+          for (let sito of this.listaSiti) {
+            var marker = new Common.MapMarker();
+
+            marker.lat = sito.az_baricentro_n;
+            marker.lgn = sito.az_baricentro_e;
+            marker.lab = sito.az_ragione_sociale;
+            marker.draggable = false;
+
+            this.mapModel.markers.push(marker);
+          }
+        }
+      })
     });
-
-    this.mapModel.markers.length=0;
-
-    for (let sito of this.listaSiti) {
-      var marker = new Common.MapMarker();
-
-      marker.lat = sito.az_baricentro_n;
-      marker.lgn = sito.az_baricentro_e;
-      marker.lab = sito.az_ragione_sociale;
-      marker.draggable = false;
-
-      this.mapModel.markers.push(marker);
-    }
-
-    console.log(this.tipologia, this.listaSiti.length);
-    console.log(this.q, this.listaSiti.length);
-    console.log(this.q, this.listaAllSiti.length);
-    console.log(this.q, this.mapModel.markers.length);
+    console.log("tipologia", this.tipologiaSelezionata);
+    console.log("provincia", this.provinciaSelezionata);
+    console.log("campo", this.campoLibero);
   }
 
-  public tipologiaChanged(tipologia) {
-    console.log("tipologia", tipologia);
-    this.tipologia = tipologia;
-    this.getSiti(undefined);
-  }
-
-  public provinciaChanged(provincia) {
-    console.log("provincia", provincia);
-    this.provincia = provincia;
-    this.getSiti(undefined);
-  }
 }

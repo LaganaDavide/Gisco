@@ -1,6 +1,8 @@
 import { Error } from "./error.namespace";
 import { Sito } from "../sito/sito.namespace";
 import { Dispositivo } from "../dispositivo/dispositivo.namespace";
+import { Filtro } from "../filtro/filtro.namespace";
+import { Documento } from "../documento/documento.namespace";
 
 export namespace Http {
     export class HttpResponse {
@@ -18,5 +20,12 @@ export namespace Http {
         public dispositivo: Dispositivo.Dispositivo;
         public titolarita: Array<Dispositivo.Titolarita>;
         public autorizzazioni: Array<Dispositivo.Autorizzazione>;
+
+        public l_lista_tipologie: Array<any>;
+        public l_dropdown: Array<Filtro.Provincia>;
+
+        public l_lista_cartelle: Array<Documento.Cartella>;
+        public l_lista_documenti: Array<Documento.Documento>;
+        public documento: Documento.Documento;
     }
 }

@@ -81,7 +81,7 @@
     </ion-list>
     <ion-list *ngSwitchCase="'Mappa'">
       <ion-item>
-        mappa
+          <map-component [mapModel]="mapModel" *ngIf="showMap" (onMarkerClicked)="markerClicked($event)" ></map-component>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'Immagini'">

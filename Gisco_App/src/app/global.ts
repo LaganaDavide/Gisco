@@ -8,5 +8,13 @@ export const GlobalVariable = Object.freeze({
     
     DISPOSITIVI_GET_ELENCO_KEYWORD: 'get_elenco_dispositivi',
     DISPOSITIVI_GET_KEYWORD: 'get_dispositivo',
+    DISPOSITIVI_GET_TIPOLOGIE_KEYWORD: 'get_tipologie_dispositivi',
+
+    DOCUMENTI_GET_CARTELLE_KEYWORD: 'get_cartelle_documenti',
+    DOCUMENTI_GET_TIPOLOGIA_KEYWORD: 'get_tipologia_documenti',
+    DOCUMENTI_GET_ELENCO_KEYWORD: 'get_elenco_documenti',
+    DOCUMENTI_GET_KEYWORD: 'get_documento',
+
+    GET_PROVINCE_KEYWORD: 'get_dropdown',
 
 });

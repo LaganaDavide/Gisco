@@ -4,17 +4,19 @@
     <ion-card class="rounded-generic-card">
         <ion-card-header class="generic-card-header blue-header">ELENCO SITI</ion-card-header>
         <ion-card-content class="yellow-header">
-            <ion-searchbar placeholder="az_ragione_sociale/titolo" (ionInput)="getSiti($event)"></ion-searchbar>
+            <ion-searchbar placeholder="campo libero" (ionInput)="getSiti($event)"></ion-searchbar>
             <ion-item>
                 <ion-label>Tipologia</ion-label>
-                <ion-select [(ngModel)]="tipologia" (ionChange)="tipologiaChanged(tipologia)">
-                    <ion-option *ngFor="let tipologia of listaTipologie" [value]="t">{{tipologia}}</ion-option>
+                <ion-select [(ngModel)]="tipologiaSelezionata" (ionChange)="getSiti()">
+                    <ion-option *ngFor="let tipologia of listaTipologie" [value]="tipologia">
+                        {{tipologia.tab_tipologia_sito_desc}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>Provincia</ion-label>
-                <ion-select [(ngModel)]="provincia" (ionChange)="provinciaChanged(provincia)">
-                    <ion-option *ngFor="let provincia of listaProvince" [value]="p">{{provincia}}</ion-option>
+                <ion-select [(ngModel)]="provinciaSelezionata" (ionChange)="getSiti()">
+                    <ion-option *ngFor="let provincia of listaProvince" [value]="provincia">{{provincia.Descrizione}}
+                    </ion-option>
                 </ion-select>
             </ion-item>
             <ion-list>

@@ -16,9 +16,12 @@ import { MappaSitiModule } from './modules/siti/mappaSiti/mappaSiti.module';
 import { DashboardSitoModule } from './modules/siti/dashboardSito/dashboardSito.module';
 import { ComponentsModule } from './modules/componenti/components.module';
 import { ElencoDispositiviModule } from './modules/dispositivi/elencoDispositivi/elencoDispositivi.module';
+import { MappaDispositiviModule } from './modules/dispositivi/mappaDispositivi/mappaDispositivi.module';
 import { DashboardDispositivoModule } from './modules/dispositivi/DashboardDispositivo/dashboardDispositivo.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { CartelleModule } from './modules/documenti/cartelle/cartelle.module';
 import { AgmCoreModule } from '@agm/core';
+import { ElencoDocumentiModule } from './modules/documenti/elencoDocumenti/elencoDocumenti.module';
 
 // #REGION - Pages
 import { LoadingPage } from './pages/loading/loading';
@@ -33,10 +36,14 @@ import { DashboardSitoPage } from './pages/siti/dashboard-sito/dashboard-sito';
 //    DISPOSITIVI
 import { ElencoDispositiviPage } from './pages/dispositivi/elenco-dispositivi/elenco-dispositivi';
 import { DashboardDispositivoPage } from './pages/dispositivi/dashboard-dispositivo/dashboard-dispositivo';
+import { MappaDispositiviPage } from './pages/dispositivi/mappa-dispositivi/mappa-dispositivi';
 
 //    CHAT
 import { ChatPage } from './pages/chat/chat';
 
+//    DOCUMENTI
+import { CartellePage } from './pages/documenti/cartelle/cartelle';
+import { ElencoDocumentiPage } from './pages/documenti/elenco-documenti/elenco-documenti';
 
 // #REGION - Components
 
@@ -48,8 +55,11 @@ import { StoreService } from './services/store/store.service';
 import { SitiService } from './services/siti/siti.service';
 import { DispositiviService } from './services/dispositivi/dispositivi.service';
 import { CheckService } from './services/shared/check.service';
-import { MappaDispositiviPage } from './pages/dispositivi/mappa-dispositivi/mappa-dispositivi';
-import { MappaDispositiviModule } from './modules/dispositivi/mappaDispositivi/mappaDispositivi.module';
+import { DocumentiService } from './services/documenti/documenti.service';
+import { ElencoTipologieModule } from './modules/documenti/elencoTipologie/elencoTipologie.module';
+import { TipologiePage } from './pages/documenti/elenco-tipologie/elenco-tipologie';
+import { DashboardDocumentoModule } from './modules/documenti/dashboardDocumento/dashboardDocumento.module';
+import { DashboardDocumentoPage } from './pages/documenti/dashboard-documento/dashboard-documento';
 
 
 @NgModule({
@@ -71,6 +81,10 @@ import { MappaDispositiviModule } from './modules/dispositivi/mappaDispositivi/m
     DashboardDispositivoModule,
     ComponentsModule,
     ChatModule,
+    CartelleModule,
+    ElencoTipologieModule,
+    ElencoDocumentiModule,
+    DashboardDocumentoModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({
@@ -91,6 +105,10 @@ import { MappaDispositiviModule } from './modules/dispositivi/mappaDispositivi/m
     ElencoDispositiviPage,
     MappaDispositiviPage,
     DashboardDispositivoPage,
+    ElencoDocumentiPage,
+    TipologiePage,
+    CartellePage,
+    DashboardDocumentoPage,
     ChatPage
   ],
   providers: [
@@ -104,6 +122,7 @@ import { MappaDispositiviModule } from './modules/dispositivi/mappaDispositivi/m
     SitiService,
     DispositiviService,
     CheckService,
+    DocumentiService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ],
   exports: [

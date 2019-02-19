@@ -61,10 +61,13 @@
     </ion-list>
     <ion-list *ngSwitchCase="'Autorizzazioni'">
         <ion-item *ngFor="let autorizzazione of autorizzazioni">
-         
         </ion-item>
       </ion-list>
-
+      <ion-list *ngSwitchCase="'Mappa'">
+        <ion-item>
+            <map-component [mapModel]="mapModel" *ngIf="showMap" (onMarkerClicked)="markerClicked($event)" ></map-component>
+        </ion-item>
+      </ion-list>
   </div>
 
 </ion-content>

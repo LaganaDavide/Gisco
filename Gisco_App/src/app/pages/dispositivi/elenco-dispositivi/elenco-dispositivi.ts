@@ -5,8 +5,9 @@ import { DashboardDispositivoPage } from '../dashboard-dispositivo/dashboard-dis
 
 import { Dispositivo } from '../../../models/dispositivo/dispositivo.namespace';
 import { DispositiviService } from '../../../services/dispositivi/dispositivi.service';
-import {StoreService} from '../../../services/store/store.service';
+import { StoreService } from '../../../services/store/store.service';
 import { Login } from '../../../models/login/login.namespace';
+import { Filtro } from '../../../models/filtro/filtro.namespace';
 
 
 /**
@@ -24,13 +25,18 @@ import { Login } from '../../../models/login/login.namespace';
 export class ElencoDispositiviPage {
 
   public listaDispositivi: Array<Dispositivo.Dispositivo>;
+  public listaProvince: Array<Filtro.Provincia>;
+  public listaTipologie: Array<Filtro.TipologiaDispositivo>;
+  public tipologiaSelezionata: Filtro.TipologiaDispositivo;
+  public provinciaSelezionata: Filtro.Provincia;
+  public campoLibero: string;
 
   constructor(public navParams: NavParams,
     public dispositiviService: DispositiviService,
-    private storeService: StoreService, 
-    private nav: Nav,
-    ) {
-      this.listaDispositivi = new Array<Dispositivo.Dispositivo>();
+    private storeService: StoreService,
+    private nav: Nav) {
+    this.listaDispositivi = new Array<Dispositivo.Dispositivo>();
+    this.campoLibero = "A";
   }
 
   ionViewDidLoad() {
@@ -38,18 +44,65 @@ export class ElencoDispositiviPage {
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
-      this.dispositiviService.getListaDispositivi(tokenValue).subscribe(r => {
+      this.dispositiviService.getListaDispositiviAll(tokenValue).subscribe(r => {
         console.log('ionViewDidLoad getListaDispositivi');
-        if(r.ErrorMessage.msg_code===0){
+        if (r.ErrorMessage.msg_code === 0) {
           console.log(r.ErrorMessage.msg_code);
           this.listaDispositivi = r.l_lista_dispositivi;
         }
       })
+
+      this.dispositiviService.getListaTipologieDispositivo(tokenValue).subscribe(r => {
+        if (r.ErrorMessage.msg_code === 0) {
+          console.log(r.ErrorMessage.msg_code);
+          this.listaTipologie = r.l_lista_tipologie;
+          this.tipologiaSelezionata = this.listaTipologie[0];
+        }
+      })
+
+      this.dispositiviService.getListaProvinceDispositivo(tokenValue).subscribe(r => {
+        if (r.ErrorMessage.msg_code === 0) {
+          console.log(r.ErrorMessage.msg_code);
+          this.listaProvince = r.l_dropdown;
+          this.provinciaSelezionata = this.listaProvince[0];
+        }
+      })
+
     });
   }
 
-  public goToDetails(event, dispositivo){
-    this.nav.push(DashboardDispositivoPage, {dispositivo : dispositivo})
+  public goToDetails(event, dispositivo) {
+    this.nav.push(DashboardDispositivoPage, { dispositivo: dispositivo })
   }
-  
+
+ public getDispositivi(event) {
+    if (event != undefined) {
+      this.campoLibero = event.srcElement.value;
+    }
+    if (this.campoLibero === "") {
+      this.campoLibero = "A";
+    }
+    if (this.tipologiaSelezionata.tab_tipo_dispositivo_cod === 0) {
+      this.tipologiaSelezionata.tab_tipo_dispositivo_cod = "A"
+    }
+    if (this.provinciaSelezionata.Codice === "") {
+      this.provinciaSelezionata.Codice = "A"
+    }
+
+    this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
+      var tokenValue = val.token_value;
+
+      this.dispositiviService.getListaDispositivi(tokenValue, this.tipologiaSelezionata.tab_tipo_dispositivo_cod, this.provinciaSelezionata.Codice, this.campoLibero).subscribe(r => {
+        console.log('ionViewDidLoad getListaDispositivi');
+        if (r.ErrorMessage.msg_code === 0) {
+          console.log(r.ErrorMessage.msg_code);
+          this.listaDispositivi = r.l_lista_dispositivi;
+          console.log("getListaDispositivi listaDispositivi", this.listaDispositivi.length);
+        }
+      })
+    });
+    console.log("tipologia", this.tipologiaSelezionata);
+    console.log("provincia", this.provinciaSelezionata);
+    console.log("campo", this.campoLibero);
+  }
 }
