@@ -95,4 +95,8 @@
     <feature name="CCCometChat">
         <param name="ios-package" value="CCCometChat" />
     </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <preference name="CameraUsesGeolocation" value="false" />
 </widget>

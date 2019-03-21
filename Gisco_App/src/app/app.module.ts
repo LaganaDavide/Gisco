@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 // #REGION - Modules
 import { LoginModule } from './modules/login/login.module';
@@ -60,6 +61,36 @@ import { ElencoTipologieModule } from './modules/documenti/elencoTipologie/elenc
 import { TipologiePage } from './pages/documenti/elenco-tipologie/elenco-tipologie';
 import { DashboardDocumentoModule } from './modules/documenti/dashboardDocumento/dashboardDocumento.module';
 import { DashboardDocumentoPage } from './pages/documenti/dashboard-documento/dashboard-documento';
+import { ElencoMessaggiPage } from './pages/messaggi/elenco-messaggi/elenco-messaggi';
+import { ElencoMessaggiModule } from './modules/messaggi/elencoMessaggi/elencoMessaggi.module';
+import { MessaggiService } from './services/messaggi/messaggi.service';
+import { NuovoMessaggioPage } from './pages/messaggi/nuovo-messaggio/nuovo-messaggio';
+import { NuovoMessaggioModule } from './modules/messaggi/nuovoMessaggio/nuovoMessaggio.module';
+import { UscitaMessaggiModule } from './modules/messaggi/uscitaMessaggi/uscitaMessaggi.module';
+import { UscitaMessaggiPage } from './pages/messaggi/uscita-messaggi/uscita-messaggi';
+import { CestinoMessaggiModule } from './modules/messaggi/cestinoMessaggi/cestinoMessaggi.module';
+import { DetailsMessaggioModule } from './modules/messaggi/detailsMessaggio/detailsMessaggio.module';
+import { ImportantiMessaggiModule } from './modules/messaggi/importantiMessaggi/importantiMessaggi.module';
+import { CestinoMessaggiPage } from './pages/messaggi/cestino-messaggi/cestino-messaggi';
+import { DetailsMessaggioPage } from './pages/messaggi/details-messaggio/details-messaggio';
+import { ImportantiMessaggiPage } from './pages/messaggi/importanti-messaggi/importanti-messaggi';
+import { DashboardProfiloModule } from './modules/profilo/dashboardProfilo/dashboardProfilo.module';
+import { DashboardProfiloPage } from './pages/profilo/dashboard-profilo';
+import { ProfiloService } from './services/profilo/profilo.service';
+import { Camera } from '@ionic-native/camera/ngx';
+import { ElencoProcedimentiModule } from './modules/procedimenti/elencoProcedimenti/elencoProcedimenti.modile';
+import { ElencoProcedimentiPage } from './pages/procedimenti/elenco-procedimenti/elenco-procedimenti';
+import { ProcedimentiService } from './services/procedimenti/procedimenti.service';
+import { DashboardProcedimentoModule } from './modules/procedimenti/dashboardProcedimento/dashboardProcedimento.module';
+import { DashboardProcedimentoPage } from './pages/procedimenti/dashboard-procedimento/dashboard-procedimento';
+import { ElencoComunicazioniPage } from './pages/comunicazioni/elenco-comunicazioni/elenco-comunicazioni';
+import { ElencoComunicazioniModule } from './modules/comunicazioni/elencoComunicazioni/elencoComunicazioni.module';
+import { ComunicazioniService } from './services/comunicazioni/comunicazioni.service';
+import { DashboardComunicazionePage } from './pages/comunicazioni/dashboard-comunicazione/dashboard-comunicazione';
+import { DashboardComunicazioneModule } from './modules/comunicazioni/dashboardComunicazione/dashboardComunicazione.module';
+import { DashboardPrescrizioneModule } from './modules/prescrizioni/dashboardPrescrizione/dashboardPrescrizione.module';
+import { DashboardPrescrizionePage } from './pages/prescrizioni/dashboard-prescrizione/dashboard-prescrizione';
+import { PrescrizioniService } from './services/prescrizioni/prescrizioni.service';
 
 
 @NgModule({
@@ -85,6 +116,19 @@ import { DashboardDocumentoPage } from './pages/documenti/dashboard-documento/da
     ElencoTipologieModule,
     ElencoDocumentiModule,
     DashboardDocumentoModule,
+    ElencoMessaggiModule,
+    UscitaMessaggiModule,
+    NuovoMessaggioModule,
+    CestinoMessaggiModule,
+    DetailsMessaggioModule,
+    ImportantiMessaggiModule,
+    DashboardProfiloModule,
+    ElencoProcedimentiModule,
+    DashboardProcedimentoModule,
+    IonicSelectableModule,
+    ElencoComunicazioniModule,
+    DashboardComunicazioneModule,
+    DashboardPrescrizioneModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({
@@ -109,7 +153,19 @@ import { DashboardDocumentoPage } from './pages/documenti/dashboard-documento/da
     TipologiePage,
     CartellePage,
     DashboardDocumentoPage,
-    ChatPage
+    ChatPage,
+    ElencoMessaggiPage,
+    NuovoMessaggioPage,
+    UscitaMessaggiPage,
+    ImportantiMessaggiPage,
+    DetailsMessaggioPage,
+    CestinoMessaggiPage,
+    DashboardProfiloPage,
+    ElencoProcedimentiPage,
+    DashboardProcedimentoPage,
+    ElencoComunicazioniPage,
+    DashboardComunicazionePage,
+    DashboardPrescrizionePage
   ],
   providers: [
     StatusBar,
@@ -120,9 +176,15 @@ import { DashboardDocumentoPage } from './pages/documenti/dashboard-documento/da
     ErrorService,
     Storage,
     SitiService,
+    MessaggiService,
     DispositiviService,
     CheckService,
     DocumentiService,
+    ProfiloService,
+    ProcedimentiService,
+    Camera, 
+    ComunicazioniService,
+    PrescrizioniService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ],
   exports: [

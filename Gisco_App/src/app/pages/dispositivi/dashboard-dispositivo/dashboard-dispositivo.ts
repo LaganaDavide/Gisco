@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 import { Dispositivo } from '../../../models/dispositivo/dispositivo.namespace';
 
 import { DispositiviService } from '../../../services/dispositivi/dispositivi.service';
@@ -19,6 +19,7 @@ import { Common } from '../../../models/common/common.namespace';
 })
 
 export class DashboardDispositivoPage {
+  
   public selectedDispositivo: Dispositivo.Dispositivo;
   public titolarita: Array<Dispositivo.Titolarita>;
   public autorizzazioni: Array<Dispositivo.Autorizzazione>;
@@ -28,18 +29,17 @@ export class DashboardDispositivoPage {
 
   public showMap: boolean;
 
-  constructor(public navCtrl: Nav,
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public dispositiviService: DispositiviService,
     private storeService: StoreService) {
+
     this.selectedDispositivo = navParams.get('dispositivo');
     var mapMarkers: Common.MapMarker[] = [];
     this.mapModel = new Common.MapModel();
     this.mapModel.markers = mapMarkers;
 
     this.showMap = false;
-
-    console.log(this.selectedDispositivo.az_codice_interno);
   }
 
   ionViewDidLoad() {
@@ -73,6 +73,7 @@ export class DashboardDispositivoPage {
       })
     });
   }
+  
   segmentDispositivoClicked(event) {
     console.log('segmentDispositivoClicked');
   }
@@ -94,5 +95,7 @@ export class DashboardDispositivoPage {
 
   }
 
-
+  back(){
+    this.navCtrl.pop();
+  }
 }

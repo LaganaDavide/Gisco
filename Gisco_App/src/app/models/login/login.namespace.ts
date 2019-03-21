@@ -10,9 +10,10 @@ export namespace Login {
 
     export class ws_Token {
         public token_value: string;
-        public m_token_permesso_key: number;
-        public m_token_user: string;
-        public m_token_password: string;
+        public token_permesso_key: number;
+        public token_user: string;
+        public token_password: string;
+        public token_dipendente_key : number;
         public result: string;
         public ErrorMessage: MessaggioErrore;
     }

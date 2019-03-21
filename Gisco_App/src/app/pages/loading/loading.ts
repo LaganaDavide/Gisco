@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LoginPage } from "../login/login";
+import { Login } from '../../models/login/login.namespace';
 
 /**
  * Generated class for the LoadingPage page.
@@ -20,25 +21,39 @@ export class LoadingPage {
   constructor(public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     private store: StoreService) {
+    /* this.presentLoadingDefault();
+     this.store.userData$.subscribe(val =>{
+       console.log(val);
+       if (val != null){
+         this.navCtrl.setRoot(HomePage, {val: 'pippo'});
+       }else{
+         this.navCtrl.setRoot(LoginPage, {val: 'pippo'});
+       }
+     })
+     this.store.getUserData();
+ */
+  }
+  ionViewDidLoad() {
     this.presentLoadingDefault();
-    this.store.userData$.subscribe(val =>{
-      console.log(val);
-      if (val != null){
-        this.navCtrl.setRoot(HomePage, {val: 'pippo'});
-      }else{
-        this.navCtrl.setRoot(LoginPage, {val: 'pippo'});
+
+    this.store.getUserDataPromise().then((val: Login.ws_Token) => {
+      if (val != null) {
+        this.navCtrl.setRoot(HomePage);
+      } else {
+        this.navCtrl.setRoot(LoginPage);
       }
-    })
-    this.store.getUserData();
+    }
+    )
+
   }
 
   presentLoadingDefault() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
-  
+
     loading.present();
-  
+
     setTimeout(() => {
       loading.dismiss();
     }, 1000);

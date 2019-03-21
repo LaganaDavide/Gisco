@@ -14,6 +14,7 @@ export class HttpService {
 
     //questa operazione serve per il login
     public getToken(url: string): Observable<Login.ws_Token> {
+        console.log(url);
 
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.get<Login.ws_Token>(url, { headers: headers });
@@ -27,4 +28,12 @@ export class HttpService {
         console.log('HttpService get ' + completeUrl);
         return this.http.get<Http.HttpResponse>(completeUrl);
     }
+
+
+    //questa operazione va solo se si è loggati
+    public post(url: string, body): Observable<Http.HttpResponse> {
+        console.log('HttpService post ' + url);
+        return this.http.post<Http.HttpResponse>(url, body);
+    }
+
 }

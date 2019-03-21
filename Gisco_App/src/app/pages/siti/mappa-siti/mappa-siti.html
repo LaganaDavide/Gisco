@@ -5,13 +5,13 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>mappaSiti</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mappa Siti</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
     <ion-searchbar placeholder="az_ragione_sociale/titolo" (ionInput)="getSiti($event)"></ion-searchbar>

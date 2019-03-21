@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { StoreService } from '../../../services/store/store.service';
 import { SitiService } from '../../../services/siti/siti.service';
@@ -38,7 +38,8 @@ export class MappaSitiPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public storeService: StoreService,
-    public sitiService: SitiService) {
+    public sitiService: SitiService,
+    public loadingCtrl: LoadingController) {
     this.listaSiti = new Array<Sito.Sito>();
     this.campoLibero = "A";
 
@@ -51,7 +52,10 @@ export class MappaSitiPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ElencoSitiPage');
-
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
@@ -77,6 +81,7 @@ export class MappaSitiPage {
 
           this.showMap = true;
         }
+        loading.dismiss();
       })
 
       this.sitiService.getListaTipologieSito(tokenValue).subscribe(r => {
@@ -105,6 +110,10 @@ export class MappaSitiPage {
   }
 
   public getSiti(event) {
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     if (event != undefined) {
       this.campoLibero = event.srcElement.value;
     }
@@ -141,6 +150,7 @@ export class MappaSitiPage {
             this.mapModel.markers.push(marker);
           }
         }
+        loading.dismiss();
       })
     });
     console.log("tipologia", this.tipologiaSelezionata);

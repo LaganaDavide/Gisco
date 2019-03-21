@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Nav, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Sito } from '../../../models/sito/sito.namespace';
 
 import { SitiService } from '../../../services/siti/siti.service';
 import { StoreService } from '../../../services/store/store.service';
 import { Login } from '../../../models/login/login.namespace';
 import { Common } from '../../../models/common/common.namespace';
+import { NavigationContainer } from 'ionic-angular/umd/navigation/navigation-container';
 /**
  * Generated class for the DashboardSitoPage page.
  *
@@ -27,12 +28,12 @@ export class DashboardSitoPage {
 
   public showMap: boolean;
 
-  constructor(public navCtrl: Nav,
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public sitiService: SitiService,
-    private storeService: StoreService) {
+    private storeService: StoreService,
+    public loadingCtrl: LoadingController) {
     this.selectedSito = navParams.get('sito');
-    // console.log(this.selectedSito.indirizzo_completo);
     console.log(this.selectedSito.az_codice_interno);
     var mapMarkers: Common.MapMarker[] = [];
     this.mapModel = new Common.MapModel();
@@ -44,6 +45,10 @@ export class DashboardSitoPage {
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad DashboardSitoPage');
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
@@ -54,13 +59,6 @@ export class DashboardSitoPage {
           this.selectedSito = r.sito;
           this.catastale = r.catastale_situazione;
           this.procedimenti = r.prescrizioni_situazione;
-          console.log(this.selectedSito.indirizzo_completo);
-          console.log(this.selectedSito.gr_ragione_sociale);
-          console.log(this.selectedSito.az_codice_interno);
-          console.log('catastale_situazione ' + this.catastale);
-          console.log('procedimenti ' + this.procedimenti);
-
-
           var marker = new Common.MapMarker();
 
           marker.lat = this.selectedSito.az_baricentro_n;
@@ -73,23 +71,28 @@ export class DashboardSitoPage {
           this.mapModel.centerLon = marker.lgn;
           this.mapModel.initialZoom = 8;
           this.showMap = true;
-
         }
+        loading.dismiss();
       })
     });
   }
+
   segmentSitoClicked(event) {
     console.log('segmentSitoClicked');
-  } 
+  }
+
   segmentCatastaleClicked(event) {
     console.log('segmentCatastaleClicked ' + this.catastale);
-  } 
+  }
+
   segmentProcedimentiClicked(event) {
     console.log('segmentProcedimentiClicked');
-  } 
+  }
+
   segmentGraficoClicked(event) {
     console.log('segmentGraficoClicked');
   }
+  
   segmentMappaClicked(event) {
     console.log('segmentMappaClicked');
   }
@@ -100,7 +103,11 @@ export class DashboardSitoPage {
 
   public markerClicked(event) {
     console.log('mearkerClicked');
+  }
 
+
+  back(){
+    this.navCtrl.pop();
   }
 
 }

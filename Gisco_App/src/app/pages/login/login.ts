@@ -1,4 +1,3 @@
-
 import { Error } from './../../models/shared/error.namespace';
 
 import { Component, Inject, forwardRef } from '@angular/core';
@@ -38,13 +37,9 @@ export class LoginPage {
   public login(): void {
 
     this.loginService.login(this.username, this.password).subscribe(r => {
-      if(r.result != "E"){
-        this.userData.m_token_user = this.username;
-        this.userData.m_token_password = this.password;
-        this.userData.token_value = r.token_value;
-        this.userData.ErrorMessage = r.ErrorMessage;
+      if (r.ErrorMessage.msg_code === 0) {
+        this.userData = r;
         this.store.setUserData(this.userData);
-        
         this.navCtrl.setRoot(HomePage, {val: 'pippo'});
       } else {
         //throw new Error("test Error");

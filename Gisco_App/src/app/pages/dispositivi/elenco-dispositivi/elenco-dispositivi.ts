@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavParams } from 'ionic-angular';
+import { NavParams, LoadingController, NavController } from 'ionic-angular';
 
 import { DashboardDispositivoPage } from '../dashboard-dispositivo/dashboard-dispositivo';
 
@@ -34,13 +34,18 @@ export class ElencoDispositiviPage {
   constructor(public navParams: NavParams,
     public dispositiviService: DispositiviService,
     private storeService: StoreService,
-    private nav: Nav) {
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController) {
     this.listaDispositivi = new Array<Dispositivo.Dispositivo>();
     this.campoLibero = "A";
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ElencoDispositiviPage');
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
@@ -50,6 +55,7 @@ export class ElencoDispositiviPage {
           console.log(r.ErrorMessage.msg_code);
           this.listaDispositivi = r.l_lista_dispositivi;
         }
+        loading.dismiss();
       })
 
       this.dispositiviService.getListaTipologieDispositivo(tokenValue).subscribe(r => {
@@ -71,11 +77,17 @@ export class ElencoDispositiviPage {
     });
   }
 
-  public goToDetails(event, dispositivo) {
-    this.nav.push(DashboardDispositivoPage, { dispositivo: dispositivo })
+  goToDetails(event, dispositivo) {
+    this.navCtrl.push(DashboardDispositivoPage, {
+      dispositivo: dispositivo
+    });
   }
 
- public getDispositivi(event) {
+  public getDispositivi(event) {
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     if (event != undefined) {
       this.campoLibero = event.srcElement.value;
     }
@@ -99,6 +111,7 @@ export class ElencoDispositiviPage {
           this.listaDispositivi = r.l_lista_dispositivi;
           console.log("getListaDispositivi listaDispositivi", this.listaDispositivi.length);
         }
+        loading.dismiss();
       })
     });
     console.log("tipologia", this.tipologiaSelezionata);

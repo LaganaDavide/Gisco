@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Nav } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Documento } from '../../../models/documento/documento.namespace';
 import { DocumentiService } from '../../../services/documenti/documenti.service';
 import { StoreService } from '../../../services/store/store.service';
@@ -21,17 +21,20 @@ import { TipologiePage } from '../elenco-tipologie/elenco-tipologie';
 export class CartellePage {
   public listaCartelle: Array<Documento.Cartella>;
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     public documentiService: DocumentiService,
     private storeService: StoreService,
-    private nav: Nav) {
+    public loadingCtrl: LoadingController) {
     this.listaCartelle = new Array<Documento.Cartella>();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartellePage');
-
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
@@ -41,14 +44,15 @@ export class CartellePage {
           console.log(r.ErrorMessage.msg_code);
           this.listaCartelle = r.l_lista_cartelle;
         }
+        loading.dismiss();
       })
     });
   }
 
   //navigazione verso la dashboard dello specifico sito selezionato
   public goToTipologieDocumenti(event, cartella) {
-    console.log("goToTipologieDocumenti click"+cartella);
-    this.nav.push(TipologiePage, { cartella: cartella })
+    console.log("goToTipologieDocumenti click" + cartella);
+    this.navCtrl.push(TipologiePage, { cartella: cartella })
   }
 
 }

@@ -4,14 +4,23 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-    <ion-navbar>
-      <ion-title>tipologie documenti</ion-title>
+<ion-header>
+    <ion-navbar hideBackButton>
+      <ion-buttons left>
+        <button (click)="back()" ion-button icon-left clear>
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <div class="icon-section">
+          <i [ngClass]="icon" [ngStyle]="{'color' : color }"></i>
+        </div>
+      </ion-buttons>
+          <ion-title>Tipologie</ion-title>
     </ion-navbar>
-  
   </ion-header>
-  
+
   <ion-content padding>
     <ion-card class="rounded-generic-card">
       <ion-card-header class="generic-card-header blue-header">ELENCO TIPOLOGIE {{selectedCartella.doc_foreign_type}}</ion-card-header>

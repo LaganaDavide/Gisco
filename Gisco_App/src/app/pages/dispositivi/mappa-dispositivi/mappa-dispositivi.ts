@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { StoreService } from '../../../services/store/store.service';
 import { DispositiviService } from '../../../services/dispositivi/dispositivi.service';
@@ -38,7 +38,8 @@ export class MappaDispositiviPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public storeService: StoreService,
-    public dispositiviService: DispositiviService) {
+    public dispositiviService: DispositiviService,
+    public loadingCtrl: LoadingController) {
     this.listaDispositivi = new Array<Dispositivo.Dispositivo>();
     this.campoLibero = "A";
 
@@ -51,7 +52,10 @@ export class MappaDispositiviPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MappaDispositiviPage');
-
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
@@ -77,6 +81,7 @@ export class MappaDispositiviPage {
 
           this.showMap = true;
         }
+        loading.dismiss();
       })
 
       this.dispositiviService.getListaTipologieDispositivo(tokenValue).subscribe(r => {
@@ -105,6 +110,10 @@ export class MappaDispositiviPage {
   }
 
   public getDispositivi(event) {
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     if (event != undefined) {
       this.campoLibero = event.srcElement.value;
     }
@@ -121,7 +130,8 @@ export class MappaDispositiviPage {
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
 
-      this.dispositiviService.getListaDispositivi(tokenValue, this.tipologiaSelezionata.tab_tipo_dispositivo_cod, this.provinciaSelezionata.Codice, this.campoLibero).subscribe(r => {
+      this.dispositiviService.getListaDispositivi(tokenValue, this.tipologiaSelezionata.tab_tipo_dispositivo_cod,
+         this.provinciaSelezionata.Codice, this.campoLibero).subscribe(r => {
         console.log('ionViewDidLoad getListaDispositivi');
         if (r.ErrorMessage.msg_code === 0) {
           console.log(r.ErrorMessage.msg_code);
@@ -141,6 +151,7 @@ export class MappaDispositiviPage {
             this.mapModel.markers.push(marker);
           }
         }
+        loading.dismiss();
       })
     });
     console.log("tipologia", this.tipologiaSelezionata);

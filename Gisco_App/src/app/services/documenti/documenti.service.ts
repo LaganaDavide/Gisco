@@ -38,11 +38,11 @@ export class DocumentiService {
             + GlobalVariable.URL_SEPARATOR + "A" , token);//campo libero
     }
 
-    public getListaDocumenti(token: string, tipo: any, categoria: string, sito: string, campoLibero: string): Observable<Http.HttpResponse> {
+    public getListaDocumenti(token: string, tipo: any, categoria: string, sito: string, campoLibero: string, from:any, to:any): Observable<Http.HttpResponse> {
         return this.httpService.get(GlobalVariable.BASE_API_URL + GlobalVariable.DOCUMENTI_GET_ELENCO_KEYWORD
             + GlobalVariable.URL_SEPARATOR + GlobalVariable.URL_TOKEN_PLACEHOLDER
-            + GlobalVariable.URL_SEPARATOR + "0" //from
-            + GlobalVariable.URL_SEPARATOR + "0" //to
+            + GlobalVariable.URL_SEPARATOR + from
+            + GlobalVariable.URL_SEPARATOR + to
             + GlobalVariable.URL_SEPARATOR + tipo
             + GlobalVariable.URL_SEPARATOR + categoria
             + GlobalVariable.URL_SEPARATOR + sito

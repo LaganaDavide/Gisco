@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Nav, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { StoreService } from '../../../services/store/store.service';
 import { Login } from '../../../models/login/login.namespace';
@@ -20,15 +20,20 @@ import { DocumentiService } from '../../../services/documenti/documenti.service'
 export class DashboardDocumentoPage {
   selectedDocumento: Documento.Documento;
 
-  constructor(public navCtrl: Nav,
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public documentiService: DocumentiService,
-    private storeService: StoreService) {
-    this.selectedDocumento = navParams.get('documento');  
+    private storeService: StoreService,
+    public loadingCtrl: LoadingController) {
+    this.selectedDocumento = navParams.get('documento');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardSitoPage');
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       console.log(tokenValue);
@@ -38,7 +43,11 @@ export class DashboardDocumentoPage {
           this.selectedDocumento = r.documento;
           console.log(this.selectedDocumento.doc_titolo);
         }
-      })
+        loading.dismiss();
+      });
     });
+  }
+  back() {
+    this.navCtrl.pop();
   }
 }
