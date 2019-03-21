@@ -1,0 +1,32 @@
+
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="back()" ion-button icon-left clear>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <div class="icon-section">
+        <i [ngClass]="icon" [ngStyle]="{'color' : color }"></i>
+      </div>
+    </ion-buttons>
+        <ion-title>Comunicazioni</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card class="rounded-generic-card">
+      <ion-card-header class="generic-card-header blue-header">ELENCO Comunicazioni</ion-card-header>
+      <ion-card-content class="yellow-header">
+          <ion-list>
+              <ion-row *ngFor="let comunicazioni of listaComunicazioni" >
+                  <ion-col *ngFor="let comunicazione of comunicazioni" (click)="goToDetails($event, comunicazione)">
+                  <ion-label *ngIf="comunicazione.comunicazioni_key!=0">Codice Sito {{comunicazione.com_titolo}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+      </ion-card-content>
+  </ion-card>
+
+</ion-content>

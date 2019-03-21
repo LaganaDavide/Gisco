@@ -1,0 +1,75 @@
+<!--
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="back()" ion-button icon-left clear>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <div class="icon-section">
+        <i [ngClass]="icon" [ngStyle]="{'color' : color }"></i>
+      </div>
+    </ion-buttons>
+    <ion-title>Comunicazione</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div padding>
+    <ion-segment [(ngModel)]="whichPage">
+      <ion-segment-button value="Comunicazione" checked (ionSelect)="segmentComunicazioneClicked($event)">
+        <ion-label>Comunicazione</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Files" checked (ionSelect)="segmentFilesClicked($event)">
+        <ion-label>Files</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Prescrizioni" (ionSelect)="segmentPrescrizioniClicked($event)">
+        <ion-label>Prescrizioni</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div *ngIf="selectedComunicazione" [ngSwitch]="whichPage">
+    <ion-list *ngSwitchCase="'Comunicazione'">
+      <ion-item>
+        <ion-label> Codice Sito {{selectedComunicazione.az_codice_interno}}</ion-label>
+        <ion-label> Sito {{selectedComunicazione.az_ragione_sociale}}</ion-label>
+        <ion-label> Titolo procedimento {{selectedComunicazione.pro_titolo}}</ion-label>
+        <ion-label> Data Comunicazione {{selectedComunicazione.com_data}}</ion-label>
+        <ion-label> Tipologia {{selectedComunicazione.tab_tipo_comunicazione_desc}}</ion-label>
+        <ion-label> Titolo {{selectedComunicazione.com_titolo}}</ion-label>
+        <ion-label> Descrizione {{selectedComunicazione.com_descrizione}}</ion-label>
+        <ion-label> Mittente {{selectedComunicazione.com_mittente}}</ion-label>
+        <ion-label> Destinatario {{selectedComunicazione.com_destinatario}}</ion-label>
+        <ion-label> Ingresso / Uscita {{selectedComunicazione.com_in_out}}</ion-label>
+        <ion-label> Verso {{selectedComunicazione.tab_verso_comunicazione_desc}}</ion-label>
+        <ion-label> Fase procedimento {{selectedComunicazione.tab_fase_procedimento_desc}}</ion-label>
+        <ion-label> Tipo documento {{selectedComunicazione.tab_tipo_documento_desc}}</ion-label>
+        <ion-label> Protocollo data {{selectedComunicazione.com_protocollo_data}}</ion-label>
+        <ion-label> Protocollo codice {{selectedComunicazione.com_protocollo_cod}}</ion-label>
+        <ion-label> Codice interno {{selectedComunicazione.com_codice_interno}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'Files'">
+      <ion-item *ngFor="let f of selectedComunicazione.com_files">
+        {{f.cof_file}}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'Prescrizioni'">
+      <ion-item *ngFor="let prescrizione of selectedComunicazione.prescrizioni"  (click)="goToDetails($event, prescrizione)">
+          {{prescrizione.pre_descrizione}}
+          {{prescrizione.tab_tipo_prescrizione_desc}}
+          {{prescrizione.pre_data_scadenza}}
+          {{prescrizione.pre_stato}}
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>
