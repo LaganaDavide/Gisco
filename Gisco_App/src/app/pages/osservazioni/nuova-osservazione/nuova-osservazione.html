@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="back()" ion-button icon-left clear>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <div class="icon-section">
+        <i [ngClass]="icon" [ngStyle]="{'color' : color }"></i>
+      </div>
+    </ion-buttons>
+    <ion-title>Nuova Osservazione</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <div class="card no-border card-large messaggi">
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <ion-item>
+            <ion-label>Sito</ion-label>
+            <!--   <ionic-selectable item-content [(ngModel)]="sitoSelezionato" [items]="listaSiti" itemTextField="nomeCognome"
+              [canSearch]="true" (onSearch)="destinatarioChange($event)">
+            </ionic-selectable> -->
+            <ion-select [(ngModel)]="sitoSelezionato">
+              <ion-option *ngFor="let sito of listaSiti" [value]="sito">
+                {{sito.az_codice_interno}} {{sito.az_ragione_sociale}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Tipologia</ion-label>
+            <ion-select [(ngModel)]="tipologiaSelezionata">
+              <ion-option *ngFor="let tipologia of listaTipologie" [value]="tipologia">
+                {{tipologia.tab_tipo_scadenza_desc}}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Osservazione</ion-label>
+            <ion-input [(ngModel)]="titolo" placeholder="campo obligatorio"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-toggle false></ion-toggle>
+            <ion-input [(ngModel)]="s" placeholder=""></ion-input>
+            <ion-select [(ngModel)]="tipologiaSelezionata">
+              <ion-option *ngFor="let tipologia of listaTipologie" [value]="tipologia">
+                {{tipologia.tab_tipo_scadenza_desc}}</ion-option>
+            </ion-select>
+            <ion-select [(ngModel)]="tipologiaSelezionata">
+              <ion-option *ngFor="let tipologia of listaTipologie" [value]="tipologia">
+                {{tipologia.tab_tipo_scadenza_desc}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Descrizione</ion-label>
+            <ion-textarea [(ngModel)]="descrizione" placeholder=""></ion-textarea>
+          </ion-item>
+
+          <button ion-button block outline (click)="salvaOsservazione()">Salva</button>
+        </ul>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

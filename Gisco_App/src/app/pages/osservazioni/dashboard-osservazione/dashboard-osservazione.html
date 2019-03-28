@@ -1,0 +1,77 @@
+<!--
+  Generated template for the DashboardSitoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="back()" ion-button icon-left clear>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <div class="icon-section">
+        <i [ngClass]="icon" [ngStyle]="{'color' : color }"></i>
+      </div>
+    </ion-buttons>
+    <ion-title>Osservazione</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div padding>
+    <ion-segment [(ngModel)]="whichPage">
+      <ion-segment-button value="Osservazione" checked (ionSelect)="segmentOsservazioneClicked($event)">
+        <ion-label>Osservazione</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Assegnazioni" (ionSelect)="segmentAssegnazioniClicked($event)">
+        <ion-label>Assegnazioni</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Immagini" (ionSelect)="segmentImmaginiClicked($event)">
+        <ion-label>Immagini</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="whichPage">
+    <ion-list *ngSwitchCase="'Osservazione'">
+      <ion-item>
+        <h3 text-center *ngIf="selectedOsservazione">
+          <p>Codice Sito {{selectedOsservazione.az_codice_interno}}</p>
+          <p> Sito {{selectedOsservazione.az_ragione_sociale}}</p>
+          <p> Titolo procedimento {{selectedOsservazione.att_titolo}}</p>
+          <p>Data avvio {{selectedOsservazione.pro_data_avvio}}</p>
+          <p>Tipologia {{selectedOsservazione.tab_tipo_procedimento_desc}}</p>
+        </h3>
+        <button *ngIf="selectedOsservazione" (click)="goToModificaOsservazione()">Modifica Osservazione</button>
+        <button *ngIf="selectedOsservazione" (click)="goToEliminaOsservazione()">Elimina Osservazione</button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'Assegnazioni'">
+      <button *ngIf="selectedOsservazione" (click)="goToNuovaAssegnazione()">Nuova Assegnazione</button>
+      <ion-item *ngFor="let assegnazione of assegnazioni">
+        <ion-row>
+          <button (click)="goToEliminaAssegnazione()">Elimina</button>
+          <span ion-text>
+            nominativo {{assegnazione.dp_cognome}} {{assegnazione.dp_nome}}
+            ruolo aziendale {{assegnazione.tab_ruolo_aziendale_desc}}
+            responsabile {{assegnazione.att_dip_scelta}}
+          </span>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'Immagini'">
+      <button *ngIf="selectedOsservazione" (click)="presentImmagineActionSheet()">Nuova Immagine</button>
+      <ion-item *ngFor="let imm of immagini">
+        <ion-row>
+          <button (click)="goToEliminaImmagine()">Elimina</button>
+          pippo
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>
