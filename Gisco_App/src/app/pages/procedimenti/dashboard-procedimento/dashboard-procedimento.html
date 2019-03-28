@@ -27,6 +27,9 @@
       <ion-segment-button value="Procedimento" checked (ionSelect)="segmentProcedimentoClicked($event)">
         <ion-label>Procedimento</ion-label>
       </ion-segment-button>
+      <ion-segment-button value="Personalizzazioni" (ionSelect)="segmentPersonalizzazioniClicked($event)">
+        <ion-label>Personalizzazioni</ion-label>
+      </ion-segment-button>
       <ion-segment-button value="Fasi" (ionSelect)="segmentFasiClicked($event)">
         <ion-label>Fasi</ion-label>
       </ion-segment-button>
@@ -50,32 +53,78 @@
           <p>Cause apertura (se presenti) {{selectedProcedimento.tab_cause_apertura_sito_desc}}</p>
           <p>Causa notifica (se presente) {{selectedProcedimento.tab_cause_notifica_desc}}</p>
           <p>Ente controllo (se presente) {{selectedProcedimento.ente_controllo}}</p>
-          <p>Icone prescrizioni {{selectedProcedimento.stato_prescrizioni}}</p>
-          <p>Icona comunicazioni {{selectedProcedimento.az_note}}</p>
+          <p *ngIf="selectedProcedimento.stato_prescrizioni ">Icone pr_ottemperate
+            {{selectedProcedimento.stato_prescrizioni.pr_ottemperate}}</p>
+          <p *ngIf="selectedProcedimento.stato_prescrizioni">Icone pr_vincolate
+            {{selectedProcedimento.stato_prescrizioni.pr_vincolate}}</p>
+          <p *ngIf="selectedProcedimento.stato_prescrizioni">Icone pr_senza_data
+            {{selectedProcedimento.stato_prescrizioni.pr_senza_data}}</p>
+          <p *ngIf="selectedProcedimento.stato_prescrizioni">Icone pr_scadute
+            {{selectedProcedimento.stato_prescrizioni.pr_scadute}}</p>
+          <p *ngIf="selectedProcedimento.stato_prescrizioni">Icone pr_in_scadenza
+            {{selectedProcedimento.stato_prescrizioni.pr_in_scadenza}}</p>
+          <p *ngIf="selectedProcedimento.stato_prescrizioni">Icone pr_prossime
+            {{selectedProcedimento.stato_prescrizioni.pr_prossime}}</p>
           <p>elenco campi personalizzati {{selectedProcedimento.az_note}}</p>
         </h3>
-        <button (click)="goToComunicazioni()">Comunicazioni</button>
-      </ion-item>                        
+        <button *ngIf="selectedProcedimento.stato_prescrizioni" (click)="goToComunicazioni()">Comunicazioni
+          {{selectedProcedimento.stato_prescrizioni.comunicazioni}}</button>
+      </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'Fasi'">
+        <ion-label>Titolo {{selectedProcedimento.pro_titolo}}</ion-label>
+        <ion-label>Sito {{selectedProcedimento.az_ragione_sociale}}</ion-label>
       <ion-item *ngFor="let f of fasi; let i=index">
         <ion-row>
           <span ion-text>
             descrizione {{f.tab_fase_procedimento_desc}}
-            <ion-icon *ngIf="f.step_avanzamento.length>0" [name]="selectedMenu == i? 'arrow-down' : 'arrow-forward'" float-right (click)="espendiFase($event, f, i)"></ion-icon>
+            <ion-icon padding-left  *ngIf="f.step_avanzamento.length>0" [name]="selectedFase == i? 'arrow-down' : 'arrow-forward'"
+              float-right (click)="espendiFase($event, f, i)"></ion-icon>
           </span>
-          <ion-list [hidden]="selectedMenu != i">
+          <ion-list [hidden]="selectedFase != i">
             <ion-item no-border *ngFor="let s_a of f.step_avanzamento">
               <ion-row>
-                  {{s_a.tab_fase_procedimento_step.tab_fase_procedimento_step_desc}}
-                  {{s_a.tab_fase_procedimento_step.inserito_il}}
-                  {{s_a.tab_fase_procedimento_step.tab_fase_procedimento_step_peso}}
+                {{s_a.tab_fase_procedimento_step.tab_fase_procedimento_step_desc}}
+                {{s_a.tab_fase_procedimento_step.inserito_il}}
+                {{s_a.tab_fase_procedimento_step.tab_fase_procedimento_step_peso}}
               </ion-row>
             </ion-item>
           </ion-list>
         </ion-row>
       </ion-item>
     </ion-list>
+    <ion-list *ngSwitchCase="'Personalizzazioni'">
+      <ion-item *ngFor="let p of personalizzazioni">
+        <ion-row>
+          <span ion-text padding-right >
+            {{p.tp_scheda_testo}}
+          </span>
+          <span ion-text *ngIf="p.tp_tipo_campo === 'T'"> 
+            {{p.tp_valore_t}}
+          </span>
+          <span ion-text *ngIf="p.tp_tipo_campo === 'D'"> 
+            {{p.tp_valore_d}}
+          </span>
+          <span ion-text *ngIf="p.tp_tipo_campo === 'N'"> 
+            {{p.tp_valore_n}}
+          </span>
+          <span ion-text *ngIf="p.tp_tipo_campo === 'S'"> 
+            {{p.tp_valore_t}}
+          </span>
+          <ion-list [hidden]="p.tp_tipo_campo != 'M'">
+            <ion-item *ngFor="let v of p.tp_valori">
+              <ion-row>
+                  {{v.tp_testo}} {{v.tp_valore}} {{v.tp_valore_scelto}}
+                <span ion-checkbox slot="end" disabled="true" checked="v.tp_valore_scelto === 'S'"></span>
+              </ion-row>
+            </ion-item>
+          </ion-list>
+        </ion-row>
+
+      </ion-item>
+    </ion-list>
+
+
   </div>
 
 </ion-content>

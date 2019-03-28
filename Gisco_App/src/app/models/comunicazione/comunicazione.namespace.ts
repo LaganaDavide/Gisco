@@ -1,5 +1,3 @@
-import { Procedimento } from "../procedimento/procedimento.namespace";
-
 export namespace Comunicazione {
 
     export class Comunicazione {
@@ -44,7 +42,7 @@ export namespace Comunicazione {
         public col_abs_wf: number;
         public row_abs_wf: number;
         public com_importazioni_key: number;
-        public com_files: Array<File>;
+        public com_files: Array<FileCom>;
         public inserito_il: string;
         public modificato_da: string;
         public modificato_il: string;
@@ -74,7 +72,7 @@ export namespace Comunicazione {
         public pre_capo_terzi: string;
         public pre_di_rilevanza: string;
         public pre_tipo_proroga_cod: number;
-       // public pre_files":[  ],
+        public pre_files: Array<FilePre>;
         public col_wf: number;
         public col_abs_wf: number;
         public row_abs_wf: number;
@@ -98,9 +96,9 @@ export namespace Comunicazione {
         public pre_societa_gestione_key: number;
         public com_titolo: any;
         public com_data: string;
-     //   public pre_attivita":[  ],
-       // public pre_tipo_proroga":{  },
-      //  public count_proroghe":{  },
+        //   public pre_attivita":[  ],
+        // public pre_tipo_proroga":{  },
+        //  public count_proroghe":{  },
         public pre_prossima_data_scadenza: string;
         public pre_cogenti_reale_data_scadenza: string;
         public pre_programmate_massima_data_scadenza: string;
@@ -108,7 +106,7 @@ export namespace Comunicazione {
         public pre_stato_desc: string;
     }
 
-    export class File {
+    export class FileCom {
         public comunicazioni_file_key: number;
         public cof_comunicazioni_key: number;
         public cof_file: string;
@@ -120,92 +118,16 @@ export namespace Comunicazione {
         public cancellato_il: string;
         public azienda_file_key: number;
     }
+
+    export class FilePre {
+        public prescrizione_file_key: number;
+        public prf_prescrizione_key: number;
+        public prf_file: string;
+        public inserito_da: string;
+        public inserito_il: string;
+        public modificato_da: string;
+        public modificato_il: string;
+        public cancellato_da: any;
+        public cancellato_il: string;
+    }
 }
-
-
-
-/*{
-    "ErrorMessage": {
-        "msg_tipo": "",
-        "msg_code": 0,
-        "msg_testo": "",
-        "msg_method": "",
-        "msg_techdata": ""
-    },
-    "procedimento": {
-        "com_azienda_key": 372,
-        "com_procedimento_key": 378,
-        "pro_titolo": "Autorizzazione allo scarico",
-        "pro_tipo_procedimento_cod": 8,
-        "pro_chiuso": "N",
-        "pro_data_avvio": "0001-01-01T00:00:00",
-        "tab_tipo_procedimento_desc": "Amministrativo scarichi",
-        "az_codice_interno": "AUT-001",
-        "az_ragione_sociale": "ADS - Bazzera Nord",
-        "pr_ottemperate": 0,
-        "pr_vincolate": 0,
-        "pr_senza_data": 1,
-        "pr_scadute": 2,
-        "pr_in_scadenza": 0,
-        "pr_prossime": 0,
-        "comunicazioni": 3
-    },
-    "comunicazione": {
-        "comunicazioni_key": 17135,
-        "com_azienda_key": 372,
-        "com_data": "2017-03-24T00:00:00",
-        "com_titolo": "Q8 indica la validità dell'autorizzazione allo scarico",
-        "com_descrizione": "",
-        "com_mittente": "",
-        "com_destinatario": "Chef Express",
-        "com_in_out": "I",
-        "tab_verso_comunicazione_cod": "",
-        "tab_tipo_comunicazione_cod": "AMM",
-        "tab_verso_comunicazione_desc": "",
-        "tab_tipo_comunicazione_desc": "Amministrativa",
-        "com_visibilita": "P",
-        "com_intervento_key": 0,
-        "com_procedimento_key": 378,
-        "com_fase_procedimento_cod": 106,
-        "com_tipo_documento_cod": 1,
-        "com_comunicazioni_key": 0,
-        "com_stato_prescrizione": "",
-        "prescrizioni": [],
-        "risponde_a": [],
-        "tab_fase_procedimento_desc": "Mantenimento e gestione",
-        "tab_tipo_documento_desc": "Comunicazione",
-        "pro_titolo": "Autorizzazione allo scarico",
-        "col_wf": 0,
-        "col_abs_wf": 0,
-        "row_abs_wf": 0,
-        "com_protocollo_cod": "",
-        "com_protocollo_data": "0001-01-01T00:00:00",
-        "com_codice_interno": "Aut--20170324-01",
-        "com_firmarichiesta": "N",
-        "com_importazioni_key": 0,
-        "com_files": [
-            {
-                "comunicazioni_file_key": 19677,
-                "cof_comunicazioni_key": 17135,
-                "cof_file": "111220171115_20170324_In_R_Rif_R_Fw_P_V_2241_ADS_BAZZERA_NORD_Priorit_Vi.pdf",
-                "inserito_da": "mesys",
-                "inserito_il": "2017-12-11T11:15:20.393",
-                "modificato_da": "",
-                "modificato_il": "0001-01-01T00:00:00",
-                "cancellato_da": null,
-                "cancellato_il": "0001-01-01T00:00:00",
-                "azienda_file_key": 0
-            }
-        ],
-        "inserito_da": "mesys",
-        "inserito_il": "2017-12-11T11:15:20.38",
-        "modificato_da": "",
-        "modificato_il": "0001-01-01T00:00:00",
-        "cancellato_da": null,
-        "cancellato_il": "0001-01-01T00:00:00",
-        "int_titolo": "",
-        "com_com_titolo": null
-    },
-    "token": "AD93FA9D70741F89A4845134FFF3117B",
-    "result": ""
-} */

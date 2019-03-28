@@ -19,6 +19,7 @@ import { PrescrizioniService } from '../../../services/prescrizioni/prescrizioni
 
 export class DashboardPrescrizionePage {
   selectedPrescrizione: Comunicazione.Prescrizione;
+  comunicazioneTitolo: string;
   whichPage: string;
 
   public showMap: boolean;
@@ -29,12 +30,11 @@ export class DashboardPrescrizionePage {
     private storeService: StoreService,
     public loadingCtrl: LoadingController) {
     this.selectedPrescrizione = navParams.get('prescrizione');
-    console.log(this.selectedPrescrizione.az_codice_interno);
+    this.comunicazioneTitolo = navParams.get('com');
   }
 
   ionViewDidLoad() {
 
-    console.log('ionViewDidLoad DashboardPrescrizionePage');
     let loading = this.loadingCtrl.create({
       content: 'Caricamento...'
     });
@@ -69,7 +69,7 @@ export class DashboardPrescrizionePage {
     console.log('segmentProrogheClicked');
   }
 
-  back(){
+  back() {
     this.navCtrl.pop();
   }
 

@@ -29,8 +29,6 @@ export class HttpService {
         return this.http.get<Http.HttpResponse>(completeUrl);
     }
 
-
-    //questa operazione va solo se si è loggati
     public post(url: string, body): Observable<Http.HttpResponse> {
         console.log('HttpService post ' + url);
         return this.http.post<Http.HttpResponse>(url, body);

@@ -42,7 +42,7 @@ export class DashboardComunicazionePage {
       console.log(tokenValue);
       this.whichPage = 'Comunicazione';
       this.comunicazioniService.getComunicazione(this.selectedComunicazione.comunicazioni_key, tokenValue).subscribe(r => {
-        console.log('ionViewDidLoad DashboardDispositivoPage getDispositivo');
+        console.log('ionViewDidLoad DashboardComunicazionePage getComunicazione');
         if (r.ErrorMessage.msg_code === 0) {
           this.selectedComunicazione = r.comunicazione;
         }
@@ -64,7 +64,7 @@ export class DashboardComunicazionePage {
   public goToDetails(event, prescrizione) {
     console.log("goToDetailsPrescrizione click" + prescrizione);
    
-      this.navCtrl.push(DashboardPrescrizionePage, { prescrizione: prescrizione })
+      this.navCtrl.push(DashboardPrescrizionePage, { prescrizione: prescrizione, com: this.selectedComunicazione.com_titolo})
     
   }
 

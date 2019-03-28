@@ -23,7 +23,7 @@ export class DashboardProcedimentoPage {
   fasi: Array<Procedimento.Fase>;
   personalizzazioni: Array<Procedimento.Personalizzazione>;
   whichPage: string;
-  selectedMenu: any;
+  selectedFase: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,16 +61,20 @@ export class DashboardProcedimentoPage {
     console.log('segmentProcedimentoClicked');
   }
 
+  segmentPersonalizzazioniClicked(event) {
+    console.log('segmentPersonalizzazioniClicked');
+  } 
+
   segmentFasiClicked(event) {
     console.log('segmentFasiClicked');
   }
 
   espendiFase(event, fase, index) {
     console.log("espendiFase click");
-    if (this.selectedMenu == index && this.selectedMenu!=-1) {
-      this.selectedMenu = -1;
+    if (this.selectedFase == index && this.selectedFase!=-1) {
+      this.selectedFase = -1;
     } else
-      this.selectedMenu = index;
+      this.selectedFase = index;
   }
 
   goToComunicazioni() {

@@ -20,7 +20,7 @@ export namespace Procedimento {
         public az_codice_interno: string;
         public az_ragione_sociale: string;
         public comunicazioni: number;
-        public stato_prescrizioni: Prescrizione;
+        public stato_prescrizioni: StatoPrescrizioni;
         public pro_azienda_key: number;
         public procedimento_key: number;
         public pro_da_data_esecuzione: string;
@@ -33,7 +33,7 @@ export namespace Procedimento {
         public ente_controllo: string;
     }
 
-    export class Prescrizione {
+  export class StatoPrescrizioni {
         public com_azienda_key: number;
         public com_procedimento_key: number;
         public pro_titolo: string;

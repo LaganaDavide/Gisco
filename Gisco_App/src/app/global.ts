@@ -39,4 +39,14 @@ export const GlobalVariable = Object.freeze({
     COMUNICAZIONI_GET_ELENCO_KEYWORD: 'get_elenco_comunicazioni',
     COMUNICAZIONI_GET_KEYWORD: 'get_comunicazione',
     PRESCRIZIONE_GET_KEYWORD: 'get_prescrizione',
+
+    OSSERVAZIONI_GET_ELENCO_KEYWORD: 'get_elenco_osservazioni',
+    OSSERVAZIONI_GET_KEYWORD: 'get_osservazione',
+    OSSERVAZIONI_SALVA_KEYWORD: 'put_osservazione',
+    OSSERVAZIONI_DELET_KEYWORD: 'del_osservazione',
+    OSSERVAZIONI_GET_TIPOLOGIA_KEYWORD: 'get_tipologie_osservazioni',
+    OSSERVAZIONI_GET_IMMAGINI_KEYWORD: 'get_elenco_immagini',
+    OSSERVAZIONI_SALVA_IMMAGINE_KEYWORD: 'put_image',
+    OSSERVAZIONI_DELET_IMMAGINE_KEYWORD: 'del_image',
+
 });

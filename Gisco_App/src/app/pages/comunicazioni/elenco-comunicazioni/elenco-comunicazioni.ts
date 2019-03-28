@@ -35,7 +35,11 @@ export class ElencoComunicazioniPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ElencoDocumentiPage');
+    console.log('ionViewDidLoad ElencoComunicazioniPage');
+    let loading = this.loadingCtrl.create({
+      content: 'Caricamento...'
+    });
+    loading.present();
     this.storeService.getUserDataPromise().then((val: Login.ws_Token) => {
       var tokenValue = val.token_value;
       this.comunicazioniService.getListaComunicazioni(tokenValue, this.selectedProcedimento.pro_azienda_key, this.selectedProcedimento.procedimento_key).subscribe(r => {
@@ -44,6 +48,7 @@ export class ElencoComunicazioniPage {
           this.listaComunicazioni = r.l_lista_comunicazioni;
           console.log(this.listaComunicazioni.length);
         }
+        loading.dismiss();
       })
     });
   }

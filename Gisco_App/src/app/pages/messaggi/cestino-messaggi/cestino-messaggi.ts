@@ -101,7 +101,7 @@ export class CestinoMessaggiPage {
       let busta = new Messaggio.BustaMessaggio();
       busta.messaggio = mess;
       busta.token = tokenValue;
-      this.messaggiService.deleteMessage(busta, busta.token).subscribe(r => {
+      this.messaggiService.deleteMessage(busta).subscribe(r => {
         if (r.ErrorMessage.msg_code === 0) {
           console.log(busta);
           console.log(r);

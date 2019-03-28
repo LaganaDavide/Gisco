@@ -91,6 +91,15 @@ import { DashboardComunicazioneModule } from './modules/comunicazioni/dashboardC
 import { DashboardPrescrizioneModule } from './modules/prescrizioni/dashboardPrescrizione/dashboardPrescrizione.module';
 import { DashboardPrescrizionePage } from './pages/prescrizioni/dashboard-prescrizione/dashboard-prescrizione';
 import { PrescrizioniService } from './services/prescrizioni/prescrizioni.service';
+import { ElencoOsservazioniModule } from './modules/osservazioni/elencoOsservazioni/elencoOsservazioni.module';
+import { ElencoOsservazioniPage } from './pages/osservazioni/elenco-osservazioni/elenco-osservazioni';
+import { OsservazioniService } from './services/osservazioni/osservazioni.service';
+import { NuovaOsservazionePage } from './pages/osservazioni/nuova-osservazione/nuova-osservazione';
+import { NuovaOsservazioneModule } from './modules/osservazioni/nuovaOsservazione/nuovaOsservazione.module';
+import { DashboardOsservazionePage } from './pages/osservazioni/dashboard-osservazione/dashboard-osservazione';
+import { DashboardOsservazioneModule } from './modules/osservazioni/dashboardOsservazione/dashboardOsservazione.module';
+import { NuovaAssegnazioneModule } from './modules/osservazioni/nuovaAssegnazione/nuovaAssegnazione.module';
+import { NuovaAssegnazionePage } from './pages/osservazioni/nuova-assegnazione/nuova-assegnazione';
 
 
 @NgModule({
@@ -129,6 +138,10 @@ import { PrescrizioniService } from './services/prescrizioni/prescrizioni.servic
     ElencoComunicazioniModule,
     DashboardComunicazioneModule,
     DashboardPrescrizioneModule,
+    ElencoOsservazioniModule,
+    NuovaOsservazioneModule,
+    NuovaAssegnazioneModule,
+    DashboardOsservazioneModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({
@@ -165,7 +178,11 @@ import { PrescrizioniService } from './services/prescrizioni/prescrizioni.servic
     DashboardProcedimentoPage,
     ElencoComunicazioniPage,
     DashboardComunicazionePage,
-    DashboardPrescrizionePage
+    DashboardPrescrizionePage,    
+    ElencoOsservazioniPage,
+    NuovaOsservazionePage,
+    NuovaAssegnazionePage,
+    DashboardOsservazionePage,
   ],
   providers: [
     StatusBar,
@@ -185,6 +202,7 @@ import { PrescrizioniService } from './services/prescrizioni/prescrizioni.servic
     Camera, 
     ComunicazioniService,
     PrescrizioniService,
+    OsservazioniService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ],
   exports: [

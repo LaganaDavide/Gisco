@@ -44,7 +44,7 @@
       <ion-item>
         <h3 text-center *ngIf="selectedPrescrizione">
           <p>sito {{selectedPrescrizione.az_ragione_sociale}}</p>
-          <p>comunicazione {{selectedPrescrizione.az_ragione_sociale}}</p>
+          <p>comunicazione {{comunicazioneTitolo}}</p>
           <p>Descrizione {{selectedPrescrizione.pre_descrizione}}</p>
           <p>data {{selectedPrescrizione.pre_data_emissione}}</p>
           <p>tipo {{selectedPrescrizione.tab_tipo_prescrizione_desc}}</p>
@@ -52,13 +52,15 @@
           <p>vincolata {{selectedPrescrizione.pre_vincolata}}</p>
           <p>pre_capo_terzi {{selectedPrescrizione.pre_capo_terzi}}</p>
           <p>pre_di_rilevanza {{selectedPrescrizione.pre_di_rilevanza}}</p>
+          <p>data scadenza {{selectedPrescrizione.pre_data_scadenza}}</p>
+          <p>data realizzazione {{selectedPrescrizione.pre_data_realizzazione}}</p>
           <p>note {{selectedPrescrizione.pre_note}}</p>
         </h3>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'Allegati'">
       <ion-item *ngFor="let f of selectedPrescrizione.pre_files">
-        {{f.cof_file}}
+        {{f.prf_file}}
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'Attività'">

@@ -32,7 +32,7 @@
                     <ion-label>Tipologia {{sito.tab_tipologia_sito_desc}}</ion-label>
                     <ion-label>Indirizzo {{sito.indirizzo_completo}}</ion-label>
                     <ion-label>Cliente {{sito.gr_ragione_sociale}}</ion-label>
-                    <ion-label>icona {{sito.prescrizioni_count}}</ion-label>
+                    <ion-label *ngIf="sito.prescrizioni_count>0">icona {{sito.prescrizioni_count}}</ion-label>
                 </ion-item>
             </ion-list>
         </ion-card-content>

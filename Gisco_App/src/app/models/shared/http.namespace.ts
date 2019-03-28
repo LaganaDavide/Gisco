@@ -7,6 +7,7 @@ import { Messaggio } from "../messaggio/messaggio.namespace";
 import { Dipendente } from "../dipendente/dipendente.namespace";
 import { Procedimento } from "../procedimento/procedimento.namespace";
 import { Comunicazione } from "../comunicazione/comunicazione.namespace";
+import { Osservazione } from "../osservazione/osservazione.namespace";
 
 export namespace Http {
     export class HttpResponse {
@@ -44,5 +45,11 @@ export namespace Http {
         public l_lista_comunicazioni: Array<Array<Comunicazione.Comunicazione>>;
         public comunicazione: Comunicazione.Comunicazione;
         public prescrizione: Comunicazione.Prescrizione;
+
+        public l_lista_osservazioni: Array<Osservazione.Osservazione>;
+        public osservazione: Osservazione.Osservazione;
+        public c_assegnazioni: Array<Osservazione.Assegnazione>;
+        public l_lista_immagini: Array<Osservazione.Immagine>;
+
     }
 }

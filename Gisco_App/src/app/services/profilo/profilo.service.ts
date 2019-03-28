@@ -22,10 +22,10 @@ export class ProfiloService {
             + GlobalVariable.URL_SEPARATOR + key, token);
     }
 
-    public changePassword(token, oldPsw, newPsw , rep): Observable<Http.HttpResponse> {
+    public changePassword(token, oldPsw: string, newPsw: string, rep: string): Observable<Http.HttpResponse> {
         let body = {
-            dipendenti_key : token.token_dipendente_key,
-            password : oldPsw,
+            dipendenti_key: token.token_dipendente_key,
+            password: oldPsw,
             password_new: newPsw,
             password_rep: rep,
             token: token.token_value
@@ -33,12 +33,12 @@ export class ProfiloService {
         return this.httpService.post(GlobalVariable.BASE_API_URL + GlobalVariable.PROFILO_CHANGE_PSW_KEYWORD, body);
     }
 
-    public changeAvatar(imm, token : Login.ws_Token): Observable<Http.HttpResponse> {
+    public changeAvatar(imm, token: Login.ws_Token): Observable<Http.HttpResponse> {
         let body = {
-            token : token,
-            dipendenti_key : token.token_dipendente_key,
-            immagine : imm
-            }
+            token: token,
+            dipendenti_key: token.token_dipendente_key,
+            immagine: imm
+        }
         return this.httpService.post(GlobalVariable.BASE_API_URL + GlobalVariable.PROFILO_CHANGE_AVATAR_KEYWORD, body);
     }
 }

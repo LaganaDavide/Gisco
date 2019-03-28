@@ -1,7 +1,7 @@
 import { LoadingPage } from './pages/loading/loading';
 
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
+import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,11 +13,11 @@ import { ElencoSitiPage } from './pages/siti/elenco-siti/elenco-siti';
 import { MappaSitiPage } from './pages/siti/mappa-siti/mappa-siti';
 import { ElencoDispositiviPage } from './pages/dispositivi/elenco-dispositivi/elenco-dispositivi';
 import { MappaDispositiviPage } from './pages/dispositivi/mappa-dispositivi/mappa-dispositivi';
-import { ChatPage } from './pages/chat/chat';
 import { CartellePage } from './pages/documenti/cartelle/cartelle';
 import { ElencoMessaggiPage } from './pages/messaggi/elenco-messaggi/elenco-messaggi';
 import { DashboardProfiloPage } from './pages/profilo/dashboard-profilo';
 import { ElencoProcedimentiPage } from './pages/procedimenti/elenco-procedimenti/elenco-procedimenti';
+import { ElencoOsservazioniPage } from './pages/osservazioni/elenco-osservazioni/elenco-osservazioni';
 
 
 @Component({
@@ -49,6 +49,7 @@ export class MyApp {
       { title: 'Documenti', component: CartellePage },
       { title: 'Messaggi', component: ElencoMessaggiPage },
       { title: 'Procedimenti', component: ElencoProcedimentiPage },
+      { title: 'Osservazioni', component: ElencoOsservazioniPage },
       { title: 'Profilo', component: DashboardProfiloPage },
     ];
   }
